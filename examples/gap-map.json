@@ -1,0 +1,17 @@
+{
+  "module": "gap-map",
+  "version": 1,
+  "workbook": "marketing-research-demo",
+  "sheetName": "Gap Map",
+  "expected": [
+    { "code": "TRUST", "name": "Trust", "minimumItems": 3 },
+    { "code": "VALUE", "name": "Perceived value", "minimumItems": 3 },
+    { "code": "LOYALTY", "name": "Loyalty intention", "minimumItems": 2 }
+  ],
+  "observed": [
+    { "column": "B", "constructCode": "TRUST", "itemCode": "TRUST1" },
+    { "column": "C", "constructCode": "TRUST", "itemCode": "TRUST2" },
+    { "column": "D", "constructCode": "VALUE", "itemCode": "VALUE1" },
+    { "column": "E", "constructCode": "OTHER", "itemCode": "OTHER1" }
+  ]
+}

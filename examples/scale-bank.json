@@ -1,0 +1,37 @@
+{
+  "module": "scale-bank",
+  "version": 1,
+  "workbook": "marketing-research-demo",
+  "sheetName": "Scale Bank",
+  "constructs": [
+    {
+      "code": "TRUST",
+      "name": "Trust",
+      "scale": { "min": 1, "max": 5 },
+      "items": [
+        {
+          "code": "TRUST1",
+          "text": "I trust this service.",
+          "source": "Demonstration item; replace with a cited validated scale."
+        },
+        {
+          "code": "TRUST2",
+          "text": "This service keeps its promises.",
+          "source": "Demonstration item; replace with a cited validated scale."
+        }
+      ]
+    },
+    {
+      "code": "VALUE",
+      "name": "Perceived value",
+      "scale": { "min": 1, "max": 7 },
+      "items": [
+        {
+          "code": "VALUE1",
+          "text": "The benefits are worth the cost.",
+          "source": "Demonstration item; replace with a cited validated scale."
+        }
+      ]
+    }
+  ]
+}
