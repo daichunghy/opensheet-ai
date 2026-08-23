@@ -4,7 +4,7 @@ OpenSheet-AI is a provider-neutral plan-and-execution protocol for agent-driven 
 
 The project is deliberately not another spreadsheet chatbot or a direct-write MCP server. Model providers, MCP servers, Excel, Google Sheets, ERP connectors, and quantitative engines belong at the edges. The core remains deterministic and testable without credentials, network access, or an LLM.
 
-**Status:** public alpha candidate (`0.1.0-alpha.2`). The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
+**Status:** public alpha candidate (`0.1.0-alpha.3`). The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
 
 ## Install from the public source
 
@@ -12,7 +12,7 @@ The npm alpha is prepared but registry publication is pending npm OTP
 verification. Use the verified GitHub tag meanwhile:
 
 ```bash
-git clone --branch v0.1.0-alpha.2 https://github.com/daichunghy/opensheet-ai.git
+git clone --branch v0.1.0-alpha.3 https://github.com/daichunghy/opensheet-ai.git
 cd opensheet-ai
 npm ci
 npm run verify
