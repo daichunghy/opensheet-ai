@@ -12,7 +12,7 @@ ADR 0005 recorded a no-go decision while the repository was private and the owne
 Publish OpenSheet-AI as a narrow public alpha:
 
 - GitHub repository: `daichunghy/opensheet-ai`;
-- npm package: `opensheet-ai@0.1.0-alpha.3` (prepared; registry publication still requires npm OTP verification);
+- npm package: `opensheet-ai@0.1.0-alpha.4` (prepared; registry publication still requires npm OTP verification);
 - public claims remain limited to the tested deterministic core and greenfield `.xlsx` adapter;
 - Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, external adoption, and production readiness remain unproven.
 

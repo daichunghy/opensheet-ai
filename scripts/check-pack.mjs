@@ -25,7 +25,7 @@ if (paths.length === 0) {
   process.exit(1);
 }
 
-const allowed = /^(package\.json|LICENSE|README\.md|dist\/|schemas\/)/;
+const allowed = /^(package\.json|LICENSE|README\.md|dist\/|schemas\/|examples\/)/;
 const forbidden = paths.filter((path) => !allowed.test(path));
 if (forbidden.length > 0) {
   process.stderr.write(`Packed unexpected files:\n${forbidden.join("\n")}\n`);
@@ -47,6 +47,8 @@ const required = [
   "schemas/intent.scale-bank.v1.schema.json",
   "schemas/intent.gap-map.v1.schema.json",
   "schemas/intent.kpi-threshold.v1.schema.json",
+  "examples/scale-bank.json",
+  "examples/gap-map.json",
 ];
 const missing = required.filter((path) => !paths.includes(path));
 if (missing.length > 0) {

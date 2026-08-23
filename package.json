@@ -1,6 +1,6 @@
 {
   "name": "opensheet-ai",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "description": "Provider-neutral plans, policy gates, and receipts for agent-driven spreadsheet automation.",
   "license": "Apache-2.0",
   "private": false,
@@ -40,7 +40,8 @@
     "dist",
     "schemas",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "examples"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
