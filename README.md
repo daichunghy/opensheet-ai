@@ -73,7 +73,7 @@ node dist/cli.js apply-memory /tmp/opensheet-plan.json
 
 ```ts
 import { compileScaleBank } from "opensheet-ai";
-import { createEmptyWorkbook, executeInMemory } from "opensheet-ai/memory";
+import { createEmptyWorkbook, memoryAdapter } from "opensheet-ai/memory";
 
 const compiled = compileScaleBank({
   module: "scale-bank",
@@ -89,8 +89,7 @@ const compiled = compileScaleBank({
   ],
 });
 
-const result = executeInMemory(compiled.plan, createEmptyWorkbook("research-demo"), {
-  dryRun: true,
+const result = memoryAdapter.preview(compiled.plan, createEmptyWorkbook("research-demo"), {
   now: () => "2026-08-22T00:00:00.000Z",
 });
 

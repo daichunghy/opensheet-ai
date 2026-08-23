@@ -1,6 +1,6 @@
 # Adapter authoring
 
-Implement `SheetAdapter` from `src/core/adapter.ts`. Do not call network, models, or the wall clock inside plan compilation.
+Implement the public `SheetAdapter` contract from `src/core/adapter.ts`. Consumers should call an adapter's `preview` or `apply` method; do not call a memory implementation helper directly. Do not call network, models, or the wall clock inside plan compilation.
 
 ## Required behavior
 
@@ -27,3 +27,12 @@ npm run check:conformance
 Minimum classes: ensure/write, literal `=`, default-deny formulas, dry-run non-mutation, blocked unsupported kind.
 
 A toy adapter that only logs operations is not a passing adapter unless it still returns receipts and refuses to claim Excel support.
+
+For the reference adapter, the public consumer shape is:
+
+```ts
+import { createEmptyWorkbook, memoryAdapter } from "opensheet-ai/memory";
+
+const result = memoryAdapter.preview(plan, createEmptyWorkbook(plan.target.workbook));
+console.log(result.snapshot, result.receipt);
+```
