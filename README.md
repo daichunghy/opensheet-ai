@@ -122,6 +122,8 @@ See [quick start](docs/QUICKSTART.md), [the product specification](docs/PRODUCT_
 If a dry-run receipt caught a wrong range for you, star the repository. It
 helps other operators find the protocol.
 
+Release history: [CHANGELOG.md](CHANGELOG.md).
+
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
