@@ -1,6 +1,6 @@
 # Quick start
 
-Local, unpublished package. Node 20 or 22.
+Public alpha package `opensheet-ai@0.1.0-alpha.5`. Node 20 or 22.
 
 ```bash
 npm install
@@ -23,6 +23,6 @@ import { createEmptyWorkbook, executeInMemory } from "opensheet-ai/memory";
 import { executeXlsx } from "opensheet-ai/xlsx";
 ```
 
-Until the package is published, import from `dist/` in this repository.
+For a published consumer, import from `opensheet-ai`; use `dist/` only when working from this repository.
 
 A session is successful when: compile emits `opensheet.plan.v1`, validate prints a `sha256:` digest, dry-run receipt status is `dry-run`, and `--apply` for xlsx creates a file whose cells match the plan literals.
