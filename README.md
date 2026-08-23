@@ -14,6 +14,10 @@ Install the public alpha from the npm registry:
 npm install opensheet-ai@alpha
 ```
 
+The GitHub source is `0.1.0-alpha.5`; the npm `alpha` dist-tag currently resolves `0.1.0-alpha.4`
+until the alpha.5 publication completes. Check the registry metadata before recording a consumer
+install as evidence.
+
 ## Verify from source
 
 ```bash
@@ -26,6 +30,8 @@ npm run verify
 The package targets Node.js 20 and 22. The GitHub repository is the source of truth for the release, compatibility notes, and issue reporting.
 
 Support and first-run questions: [`.github/SUPPORT.md`](.github/SUPPORT.md) or [GitHub Discussions](https://github.com/daichunghy/opensheet-ai/discussions).
+For a consented human walkthrough, use the [35-minute session invite](docs/sessions/INVITE-EN.md)
+and [session protocol](docs/sessions/PROTOCOL.md).
 
 ## Current vertical slice
 
