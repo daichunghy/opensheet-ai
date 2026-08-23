@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensheet-ai.dev/schemas/intent.scale-bank.v1.schema.json",
+  "title": "OpenSheet-AI Scale Bank Intent v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["module", "version", "workbook", "constructs"],
+  "properties": {
+    "module": { "const": "scale-bank" },
+    "version": { "const": 1 },
+    "workbook": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "sheetName": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "constructs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "name", "scale", "items"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "name": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "scale": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["min", "max"],
+            "properties": {
+              "min": { "type": "integer" },
+              "max": { "type": "integer" }
+            }
+          },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "text"],
+              "properties": {
+                "code": { "type": "string", "minLength": 1, "maxLength": 500 },
+                "text": { "type": "string", "minLength": 1, "maxLength": 500 },
+                "reverse": { "type": "boolean" },
+                "source": { "type": "string", "minLength": 1, "maxLength": 500 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

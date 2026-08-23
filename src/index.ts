@@ -1,8 +1,62 @@
 export { canonicalize, digestJson } from "./core/canonical.js";
 export { compilePlan, operationTouchedCells, summarizePlan } from "./core/plan.js";
 export { DEFAULT_POLICY, evaluatePolicy, type SheetPolicy } from "./core/policy.js";
-export { columnNumberToName, parseA1Range, type ParsedRange } from "./core/range.js";
+export { columnNumberToName, parseA1Range, parseColumnName, type ParsedRange } from "./core/range.js";
 export { assertSheetPlan, PlanValidationError } from "./core/validation.js";
+export {
+  ERROR_CODES,
+  IntentValidationError,
+  PolicyConfigurationError,
+  RangeParseError,
+  type ErrorCode,
+  type PlanIssue,
+} from "./core/errors.js";
+export {
+  PLAN_V1_OPERATION_KINDS,
+  operationSupportMap,
+  preflightPlan,
+  type AdapterCapability,
+  type OperationSupport,
+  type PlanV1OperationKind,
+  type PreflightResult,
+} from "./core/capability.js";
+export type {
+  AdapterExecutionOptions,
+  AdapterExecutionResult,
+  SheetAdapter,
+} from "./core/adapter.js";
+export {
+  diffSnapshots,
+  digestSnapshot,
+  emptySemanticDiff,
+  explodeSnapshot,
+  snapshotMemoryWorkbook,
+  type CellRef,
+  type ColumnRef,
+  type RangeRef,
+  type SemanticDiff,
+  type SnapshotCell,
+  type SnapshotColumnWidth,
+  type SnapshotFormat,
+  type SnapshotSheet,
+  type SnapshotSourceWorkbook,
+  type SnapshotValidation,
+  type WorkbookSnapshot,
+} from "./core/snapshot.js";
+export {
+  digestRangeState,
+  evaluatePreconditions,
+  evaluateWorkbookBinding,
+  preflightSheetTargets,
+  type PlanPreconditions,
+  type RangeStateDigest,
+} from "./core/preconditions.js";
+export { IDEMPOTENT_REPLAY_FINDING, isIdempotentReplay } from "./core/idempotency.js";
+export {
+  verifyReceipt,
+  type ReceiptVerificationInput,
+  type ReceiptVerificationResult,
+} from "./core/receipt.js";
 export type {
   CellFormat,
   CellValue,
@@ -16,15 +70,6 @@ export type {
   ValidationRule,
 } from "./core/types.js";
 export {
-  createEmptyWorkbook,
-  executeInMemory,
-  type MemoryCell,
-  type MemoryExecutionOptions,
-  type MemoryExecutionResult,
-  type MemorySheet,
-  type MemoryWorkbook,
-} from "./adapters/memory.js";
-export {
   compileScaleBank,
   type ScaleBankConstruct,
   type ScaleBankIntent,
@@ -36,3 +81,11 @@ export {
   type GapMapIntent,
   type ObservedColumn,
 } from "./modules/gap-map.js";
+export { parseGapMapIntent, parseKpiThresholdIntent, parseScaleBankIntent } from "./modules/intent.js";
+export {
+  compileKpiThreshold,
+  kpiStatus,
+  type KpiStatus,
+  type KpiThresholdIntent,
+  type KpiThresholdItem,
+} from "./modules/kpi-threshold.js";

@@ -1,3 +1,4 @@
+import { PolicyConfigurationError } from "./errors.js";
 import { operationTouchedCells } from "./plan.js";
 import type { PolicyDecision, PolicyFinding, SheetPlan } from "./types.js";
 import { assertSheetPlan } from "./validation.js";
@@ -11,34 +12,46 @@ export interface SheetPolicy {
   readonly allowedSheets?: readonly string[];
 }
 
-export const DEFAULT_POLICY: SheetPolicy = {
+export const DEFAULT_POLICY: SheetPolicy = Object.freeze({
   maxOperations: 100,
   maxTouchedCells: 50_000,
   allowSheetCreation: true,
   allowFormulaWrites: false,
   allowFormatting: true,
-};
+});
 
 function assertPolicy(policy: SheetPolicy): void {
   if (!Number.isInteger(policy.maxOperations) || policy.maxOperations < 0) {
-    throw new TypeError("Policy maxOperations must be a non-negative integer.");
+    throw new PolicyConfigurationError(
+      "Policy maxOperations must be a non-negative integer.",
+      "policy.maxOperations",
+    );
   }
   if (!Number.isInteger(policy.maxTouchedCells) || policy.maxTouchedCells < 0) {
-    throw new TypeError("Policy maxTouchedCells must be a non-negative integer.");
+    throw new PolicyConfigurationError(
+      "Policy maxTouchedCells must be a non-negative integer.",
+      "policy.maxTouchedCells",
+    );
   }
   if (
     typeof policy.allowSheetCreation !== "boolean" ||
     typeof policy.allowFormulaWrites !== "boolean" ||
     typeof policy.allowFormatting !== "boolean"
   ) {
-    throw new TypeError("Policy permission fields must be booleans.");
+    throw new PolicyConfigurationError(
+      "Policy permission fields must be booleans.",
+      "policy",
+    );
   }
   if (
     policy.allowedSheets !== undefined &&
     (!Array.isArray(policy.allowedSheets) ||
       policy.allowedSheets.some((sheet) => typeof sheet !== "string" || sheet.length === 0))
   ) {
-    throw new TypeError("Policy allowedSheets must be an array of non-empty strings.");
+    throw new PolicyConfigurationError(
+      "Policy allowedSheets must be an array of non-empty strings.",
+      "policy.allowedSheets",
+    );
   }
 }
 

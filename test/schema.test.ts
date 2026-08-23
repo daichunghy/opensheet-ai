@@ -19,4 +19,20 @@ describe("published schemas", () => {
     const schema = await readSchema("receipt.v1.schema.json");
     expect(schema["$id"]).toBe("https://opensheet-ai.dev/schemas/receipt.v1.schema.json");
   });
+
+  it("parses the capability and snapshot schemas", async () => {
+    const capability = await readSchema("capability.v1.schema.json");
+    const snapshot = await readSchema("snapshot.v1.schema.json");
+    expect(capability["$id"]).toBe("https://opensheet-ai.dev/schemas/capability.v1.schema.json");
+    expect(snapshot["$id"]).toBe("https://opensheet-ai.dev/schemas/snapshot.v1.schema.json");
+  });
+
+  it("parses closed-world intent schemas", async () => {
+    const scale = await readSchema("intent.scale-bank.v1.schema.json");
+    const gap = await readSchema("intent.gap-map.v1.schema.json");
+    expect(scale["$id"]).toBe("https://opensheet-ai.dev/schemas/intent.scale-bank.v1.schema.json");
+    expect(gap["$id"]).toBe("https://opensheet-ai.dev/schemas/intent.gap-map.v1.schema.json");
+    const kpi = await readSchema("intent.kpi-threshold.v1.schema.json");
+    expect(kpi["$id"]).toBe("https://opensheet-ai.dev/schemas/intent.kpi-threshold.v1.schema.json");
+  });
 });

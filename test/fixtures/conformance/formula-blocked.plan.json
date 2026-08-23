@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "opensheet.plan.v1",
+  "planId": "conformance-formula-blocked",
+  "source": { "module": "conformance", "version": "1" },
+  "target": { "workbook": "test-workbook" },
+  "operations": [
+    { "id": "ensure", "kind": "ensure-sheet", "sheet": "Data" },
+    {
+      "id": "formula",
+      "kind": "write-formulas",
+      "sheet": "Data",
+      "range": "A1",
+      "formulas": [["=1+1"]]
+    }
+  ],
+  "metadata": { "suite": "formula-blocked" }
+}

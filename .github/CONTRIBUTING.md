@@ -4,7 +4,7 @@ OpenSheet-AI welcomes focused changes that strengthen the versioned plan contrac
 
 Before opening a pull request:
 
-1. Read `docs/PRODUCT_SPEC.md`, `docs/ARCHITECTURE.md`, and `docs/THREAT_MODEL.md`.
+1. Read `docs/PRODUCT_SPEC.md`, `docs/ARCHITECTURE.md`, `docs/THREAT_MODEL.md`, and `docs/ADAPTER_AUTHORING.md` for adapter work.
 2. Keep planning code free of network access, credentials, model calls, and implicit time.
 3. Add regression and negative tests for changed behavior.
 4. Run `npm run verify`.

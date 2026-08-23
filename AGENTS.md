@@ -16,16 +16,16 @@ Read `docs/PRODUCT_SPEC.md`, `docs/ARCHITECTURE.md`, and `docs/THREAT_MODEL.md` 
 
 ## Source layout
 
-- `src/core/`: versioned contracts, validation, canonicalization, policy, and range utilities.
-- `src/modules/`: business-intent compilers that produce core plans.
-- `src/adapters/`: execution boundaries; the current adapter is in-memory only.
-- `schemas/`: public JSON Schema contracts.
+- `src/core/`: versioned contracts, validation, canonicalization, policy, range utilities, capability, snapshot, preconditions, idempotency, receipt verification, and stable error codes.
+- `src/modules/`: business-intent compilers that produce core plans (`scale-bank`, `gap-map`, `kpi-threshold`).
+- `src/adapters/`: execution boundaries (`memory`, greenfield `xlsx`). Core must not import ExcelJS.
+- `schemas/`: public JSON Schema contracts (`plan`, `receipt`, `capability`, `snapshot`).
 - `examples/`: executable typed-intent examples.
-- `test/`: determinism, negative, policy, module, and adapter tests.
-- `docs/`: product, architecture, research, security, and delivery decisions.
+- `test/`: determinism, negative, policy, module, adapter, schema-reconciliation, property, and conformance tests. Recorded fixtures live in `test/fixtures/conformance/`.
+- `docs/`: product, architecture, research, security, compatibility, budgets, and delivery decisions.
 
 ## Required verification
 
 Run `npm run verify` after meaningful changes. Add negative or regression coverage for every contract, policy, or execution-boundary change.
 
-The repository is a local foundation prototype until publication is explicitly authorized.
+The repository is a public alpha only after the owner-authorized repository and package publication have been verified. Keep external-adapter, adoption, and production claims fail-closed until their evidence exists.

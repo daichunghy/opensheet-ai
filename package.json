@@ -1,12 +1,23 @@
 {
   "name": "opensheet-ai",
-  "version": "0.0.0-dev",
+  "version": "0.1.0-alpha.1",
   "description": "Provider-neutral plans, policy gates, and receipts for agent-driven spreadsheet automation.",
   "license": "Apache-2.0",
-  "private": true,
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daichunghy/opensheet-ai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/daichunghy/opensheet-ai/issues"
+  },
+  "homepage": "https://github.com/daichunghy/opensheet-ai#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=20 <23"
   },
   "bin": {
     "opensheet-ai": "dist/cli.js"
@@ -15,6 +26,14 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./memory": {
+      "types": "./dist/adapters/memory.d.ts",
+      "default": "./dist/adapters/memory.js"
+    },
+    "./xlsx": {
+      "types": "./dist/adapters/xlsx.d.ts",
+      "default": "./dist/adapters/xlsx.js"
     }
   },
   "files": [
@@ -25,15 +44,33 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "prepack": "npm run build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check:pack": "npm pack --dry-run",
-    "verify": "npm run typecheck && npm run test && npm run build && npm run check:pack"
+    "check:pack": "node scripts/check-pack.mjs",
+    "check:schema": "node scripts/check-schema.mjs",
+    "check:budget": "node scripts/measure-budget.mjs",
+    "check:secrets": "node scripts/check-secrets.mjs",
+    "check:smoke": "node scripts/cli-smoke.mjs",
+    "check:clean-room": "node scripts/clean-room.mjs",
+    "check:conformance": "node scripts/conformance.mjs",
+    "check:quickstart": "node scripts/quickstart-sessions.mjs",
+    "pack:session": "node scripts/pack-session.mjs",
+    "verify": "npm run typecheck && npm run build && npm run test && npm run check:schema && npm run check:budget && npm run check:pack && npm run check:secrets && npm run check:smoke && npm run check:clean-room && npm run check:conformance && npm run check:quickstart"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "fast-check": "^4.3.0",
     "typescript": "^5.8.3",
     "vitest": "^3.1.2"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
   }
 }

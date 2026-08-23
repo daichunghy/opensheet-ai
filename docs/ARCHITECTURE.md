@@ -43,7 +43,9 @@ For current behavior, use this order:
 5. examples and README;
 6. roadmap statements.
 
-The runtime contract and JSON Schema must be reconciled before a public prerelease. The current prototype tests their identities but does not yet run a shared JSON Schema validator.
+Digest bytes follow [CANONICAL_JSON.md](CANONICAL_JSON.md), not RFC 8785.
+
+The runtime contract and JSON Schema are reconciled in `test/schema-reconciliation.test.ts` using Ajv as a **test/CI-only** dependency. `assertSheetPlan` remains the execution-path validator. Residual gaps (Excel bounds, reversed ranges, finite numbers, matrix geometry) are documented in `docs/decisions/0002-schema-validator-test-only.md`.
 
 ## 3. Core invariants
 
@@ -61,11 +63,14 @@ Literal strings and formulas use different operations. A string beginning with `
 
 ### 3.4 Validate, then govern, then execute
 
-Adapters must not mutate state before all three checks complete:
+`compilePlan` structured-clones the validated plan. Digest, policy, preflight, preconditions, and adapter execution use that clone, not the caller’s live object. `DEFAULT_POLICY` is frozen.
+
+Adapters must not mutate state before all of these complete:
 
 1. structural validation;
 2. policy decision;
-3. adapter capability and precondition checks.
+3. workbook identity and capability preflight;
+4. sheet-target and caller preconditions.
 
 ### 3.5 Immutable caller state
 
@@ -136,26 +141,52 @@ interface SheetPolicy {
 
 The default allows up to 100 operations and 50,000 touched cells, permits sheet creation and formatting, and blocks formulas. Consumers handling sensitive workbooks should provide an explicit sheet allowlist and smaller budgets.
 
-Future policy work should add preconditions and data classifications before adding more permissions.
+Preconditions (sheet existence, workbook digest, range-state digest) are evaluated by the adapter after policy and capability preflight, not inside the policy object. Data classifications remain future work.
 
-## 6. Adapter contract direction
+## 6. Adapter contract
 
-The current `executeInMemory` function proves sequencing and receipt behavior. It is not yet the final public adapter interface.
+Adapters implement `SheetAdapter` (`src/core/adapter.ts`): `capability`, `snapshot`, `preflight`, `preview`, `apply`. The package root does not export memory types. Import `opensheet-ai/memory` for `executeInMemory` and `memoryAdapter`.
 
-The next adapter contract shall include:
+`executeInMemory` is the in-memory implementation. `executeXlsx` maps that result to a new `.xlsx` file through ExcelJS and read-back. It is not Google Sheets, Excel desktop, or a formula engine. Sequence:
 
-- stable adapter identifier and version;
-- supported plan versions and operation kinds;
-- platform limits and normalization rules;
-- read-snapshot method;
-- preflight capability result;
-- preview method where the platform supports it;
-- apply method with idempotency and optimistic-concurrency input;
-- normalized execution evidence;
-- redaction behavior;
-- explicit unsupported and partial-failure results.
+1. `compilePlan` / `assertSheetPlan`;
+2. `evaluatePolicy`;
+3. `preflightPlan(plan, options.capability ?? MEMORY_CAPABILITY)`;
+4. `evaluatePreconditions` when `options.preconditions` is supplied;
+5. opt-in idempotent replay when `previousReceipt.status === "applied"`, `planDigest` matches, and `previousReceipt.afterDigest === beforeDigest`;
+6. dry-run or apply on clones only;
+7. `opensheet.receipt.v1`.
 
-An adapter must reject the complete plan before mutation if any operation is unsupported.
+Default `dryRun` is `true`. Caller-owned workbooks are never mutated.
+
+### 6.1 Capability and preflight
+
+`opensheet.capability.v1` declares adapter identity, supported plan versions, and per-kind `supported` | `unsupported`. `preflightPlan` fails closed:
+
+- unknown or unsupported operation kind → finding `unsupported_operation`;
+- plan version absent from `planVersions` → finding `unsupported_plan_version`.
+
+The memory adapter exports `MEMORY_CAPABILITY` with every v1 kind `supported`. A host may pass a stricter capability; blocked plans return a cloned workbook and do not write.
+
+### 6.2 Snapshot and semantic diff
+
+`opensheet.snapshot.v1` is a normalized view: sheets sorted by name, cells as a sorted `{ address, kind, value|formula }` array, validations/formats keyed by normalized range, plus frozen panes and column widths. `diffSnapshots` reports added/removed/changed sheets, cells, validations, formats, frozen panes, and widths.
+
+Adapter **state** digests (`beforeDigest` / `afterDigest`) remain `digestJson(workbook)` over the memory workbook object. Snapshot digests are a separate semantic identifier via `digestJson(snapshot)`.
+
+### 6.3 Preconditions
+
+`PlanPreconditions` may require `workbookDigest`, `sheetsMustExist`, `sheetsMustNotExist`, and `rangeDigests` (SHA-256 of the canonical cell payload in a range). Evaluation runs against the current in-memory workbook **before** mutation. Mismatch → receipt `blocked`, finding `precondition_mismatch`, workbook unchanged.
+
+### 6.4 Idempotency
+
+Re-applying the same plan without `previousReceipt` still writes (values overwrite). Idempotency is opt-in: if `previousReceipt` proves the same plan was already applied to the current `beforeDigest`, execution is a no-op, status `applied`, finding `idempotent_replay`. If the workbook drifted, replay is not short-circuited.
+
+### 6.5 Receipt verification
+
+`verifyReceipt` checks schema version, `planDigest`, adapter state digests, dry-run `projectedAfterDigest`, blocked non-mutation, and applied after-state. Tampering with `planDigest`, swapping `afterDigest`, or dropping `projectedAfterDigest` on dry-run fails verification.
+
+Later adapters still need platform limits, redaction, and partial-failure contracts. They must reject the complete plan before mutation if any operation is unsupported.
 
 ## 7. Receipt model
 

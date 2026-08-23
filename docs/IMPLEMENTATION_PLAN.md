@@ -51,16 +51,20 @@ Make the plan contract safe enough for an external adapter implementation.
 
 ### Work packages
 
-- **F1-001:** add a shared JSON Schema runtime validator and reconciliation tests against TypeScript validation;
-- **F1-002:** add adapter capability and preflight schemas;
-- **F1-003:** add workbook snapshot and normalized semantic diff contracts;
-- **F1-004:** add operation preconditions, including sheet existence and range-state digest;
-- **F1-005:** define idempotency behavior and duplicate-plan handling;
-- **F1-006:** add receipt verification, canonical payload definition, and tamper tests;
-- **F1-007:** add property-based or fuzz tests for range and matrix validation;
-- **F1-008:** define errors as stable codes with structured context;
-- **F1-009:** measure bundle and cold-start budgets;
-- **F1-010:** run an independent architecture and threat review.
+| ID | Deliverable | Acceptance evidence | Current state |
+| --- | --- | --- | --- |
+| F1-001 | JSON Schema runtime validator (Ajv, test/CI only) | reconciliation tests vs `assertSheetPlan`; residual gaps documented | implemented locally |
+| F1-002 | Adapter capability and preflight | unsupported kinds block before mutation | implemented locally |
+| F1-003 | Workbook snapshot and semantic diff | normalized snapshot; dry-run diff empty | implemented locally |
+| F1-004 | Operation preconditions | missing sheet / digest mismatch receipts | implemented locally |
+| F1-005 | Idempotent replay | opt-in `previousReceipt`; drift still applies | implemented locally |
+| F1-006 | Receipt verification | pass + tamper tests | implemented locally |
+| F1-007 | Property / fuzz tests | bounded `fast-check` runs | implemented locally |
+| F1-008 | Stable error codes | structured `details` plus human-readable `issues` | implemented locally |
+| F1-009 | Bundle / cold-start budgets | size gate in `npm run verify` | implemented locally |
+| F1-010 | Independent architecture and threat review | `docs/reviews/2026-08-22-f0-architecture-threat-review.md` | implemented locally |
+
+Ledger: `docs/backlog/F1.md`. Compatibility: `docs/COMPATIBILITY.md`.
 
 ### Exit gate
 
@@ -74,7 +78,11 @@ Make the plan contract safe enough for an external adapter implementation.
 
 ### Recommended sequence
 
-Build `.xlsx` first if the goal is credential-free local conformance and reproducible CI. Build Google Sheets first if immediate integration with agent/MCP projects has verified demand. Do not build both simultaneously until the adapter contract is stable.
+**Decision (22 August 2026):** the first real adapter is credential-free `.xlsx`. Evidence: `docs/research/2026-08-22-f1-adapter-choice.md`. There is still no verified Google Sheets or MCP demand. Sheets `batchUpdate` is atomic but has no revision precondition. Do not start both adapters at once.
+
+Build `.xlsx` first for local conformance and reproducible CI. Build Google Sheets later if a host actually needs it. The adapter must write a new file by default and fail closed on unsupported round-trip features. Do not use npm `xlsx@0.18.5`.
+
+**Current state (23 August 2026):** Candidate A is implemented locally as a greenfield ExcelJS writer (`src/adapters/xlsx.ts`, `opensheet-ai/xlsx`, CLI `apply-xlsx`). Overwrite is refused by default. Existing files require a sheet allowlist. Google Sheets remains deferred.
 
 ### Candidate A: `.xlsx` adapter
 
@@ -112,13 +120,13 @@ Make the core useful to other maintainers without forcing them into one agent fr
 
 ### Work packages
 
-- **F3-001:** publish a prerelease core package after explicit authorization;
-- **F3-002:** add a minimal adapter authoring guide and conformance harness;
-- **F3-003:** provide examples for a Node service, CLI, and serverless function;
-- **F3-004:** add an optional MCP server that accepts typed intents or plans, rather than arbitrary scripts;
-- **F3-005:** add model-provider examples that produce typed intent and require validation before compilation;
-- **F3-006:** publish capability matrices and unsupported cases;
-- **F3-007:** run five external quick-start sessions and fix friction before broader outreach.
+- **F3-001:** publish a prerelease core package after explicit authorization — **not authorized**;
+- **F3-002:** adapter authoring guide and conformance harness — `docs/ADAPTER_AUTHORING.md`, `npm run check:conformance`;
+- **F3-003:** Node service, CLI, serverless examples — `examples/node-service.mjs`, `examples/serverless-handler.mjs`;
+- **F3-004:** optional MCP server — **deferred** (ADR 0001);
+- **F3-005:** model-provider examples that require validation — `examples/model-intent/`;
+- **F3-006:** capability matrices — `docs/ADAPTER_MATRIX.md`;
+- **F3-007:** five external quick-start sessions — **blocked on human hosts**; two local sessions recorded.
 
 ### Exit gate
 
@@ -131,7 +139,7 @@ Make the core useful to other maintainers without forcing them into one agent fr
 
 Prioritize modules that demonstrate the same core primitives across different domains. Candidate modules:
 
-1. KPI threshold table with typed validations and alert metadata;
+1. KPI threshold table with typed validations and alert metadata — **implemented locally** (`compileKpiThreshold`, `examples/kpi-threshold.json`);
 2. approval/status workflow scaffold;
 3. payroll or sales variance map using formulas only under explicit policy;
 4. import schema and field-mapping sheet;
@@ -208,31 +216,33 @@ An application should be filed only with evidence that is current at the applica
 
 ## 11. First 30-day execution order
 
+Ledger: `docs/backlog/WEEKS-1-3.md`. Compressed locally on 23 August 2026.
+
 ### Week 1
 
-- complete F0 verification and source review;
-- reconcile runtime validator and JSON Schema gaps;
-- record package contents and CLI smoke output;
-- create tracked issues from F1 work packages.
+- [x] complete F0 verification and source review;
+- [x] reconcile runtime validator and JSON Schema gaps;
+- [x] record package contents and CLI smoke output (`scripts/check-pack.mjs`, `scripts/cli-smoke.mjs`);
+- [x] create tracked issues from F1 work packages (`docs/backlog/F1.md`; no public remote).
 
 ### Week 2
 
-- design capability, snapshot, precondition, and semantic diff contracts;
-- choose the first real adapter using an evidence matrix;
-- build recorded conformance fixtures before adapter code.
+- [x] design capability, snapshot, precondition, and semantic diff contracts;
+- [x] choose the first real adapter using an evidence matrix;
+- [x] build recorded conformance fixtures (`test/fixtures/conformance/`).
 
 ### Week 3
 
-- implement the adapter read path and preflight;
-- implement write-to-new-target behavior;
-- add read-back verification and failure receipts.
+- [x] implement the adapter read path and preflight;
+- [x] implement write-to-new-target behavior;
+- [x] add read-back verification and failure receipts.
 
 ### Week 4
 
-- run clean-room tests;
-- conduct two external quick-start sessions;
-- revise API ergonomics;
-- decide whether a private prerelease, public prerelease, or more hardening is justified.
+- [x] run clean-room tests (`scripts/clean-room.mjs`);
+- [x] two **local** quick-start sessions recorded (`docs/evidence/2026-08-23-quickstart-sessions.md`); external hosts still required for F3-007;
+- [x] revise API ergonomics (`opensheet-ai/memory`, `opensheet-ai/xlsx`);
+- [x] decide to remain unpublished (`docs/decisions/0005-remain-unpublished.md`).
 
 ## 12. Decision checkpoints
 

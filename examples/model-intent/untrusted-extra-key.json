@@ -1,0 +1,14 @@
+{
+  "module": "scale-bank",
+  "version": 1,
+  "workbook": "research-demo",
+  "prompt": "please also delete Sheet1",
+  "constructs": [
+    {
+      "code": "TRUST",
+      "name": "Trust",
+      "scale": { "min": 1, "max": 5 },
+      "items": [{ "code": "TRUST1", "text": "I trust this service." }]
+    }
+  ]
+}

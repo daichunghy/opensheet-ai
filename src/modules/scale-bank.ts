@@ -1,6 +1,7 @@
 import { digestJson } from "../core/canonical.js";
 import { compilePlan } from "../core/plan.js";
 import type { CellValue, CompiledPlan, SheetPlan } from "../core/types.js";
+import { parseScaleBankIntent } from "./intent.js";
 
 export interface ScaleBankItem {
   readonly code: string;
@@ -27,53 +28,8 @@ export interface ScaleBankIntent {
   readonly constructs: readonly ScaleBankConstruct[];
 }
 
-function requireText(value: string, field: string): void {
-  if (value.trim().length === 0 || value.length > 500) {
-    throw new TypeError(`${field} must contain from 1 to 500 characters.`);
-  }
-}
-
-function validateIntent(intent: ScaleBankIntent): void {
-  if (intent.module !== "scale-bank" || intent.version !== 1) {
-    throw new TypeError("Scale bank intent must use module 'scale-bank' and version 1.");
-  }
-  requireText(intent.workbook, "workbook");
-  if (intent.constructs.length === 0) {
-    throw new TypeError("Scale bank intent requires at least one construct.");
-  }
-
-  const constructCodes = new Set<string>();
-  const itemCodes = new Set<string>();
-  intent.constructs.forEach((construct, constructIndex) => {
-    requireText(construct.code, `constructs[${constructIndex}].code`);
-    requireText(construct.name, `constructs[${constructIndex}].name`);
-    if (constructCodes.has(construct.code)) {
-      throw new TypeError(`Duplicate construct code: ${construct.code}`);
-    }
-    constructCodes.add(construct.code);
-    if (
-      !Number.isInteger(construct.scale.min) ||
-      !Number.isInteger(construct.scale.max) ||
-      construct.scale.min >= construct.scale.max
-    ) {
-      throw new TypeError(`Construct ${construct.code} requires integer scale bounds where min < max.`);
-    }
-    if (construct.items.length === 0) {
-      throw new TypeError(`Construct ${construct.code} requires at least one item.`);
-    }
-    construct.items.forEach((item, itemIndex) => {
-      requireText(item.code, `constructs[${constructIndex}].items[${itemIndex}].code`);
-      requireText(item.text, `constructs[${constructIndex}].items[${itemIndex}].text`);
-      if (itemCodes.has(item.code)) {
-        throw new TypeError(`Duplicate scale item code: ${item.code}`);
-      }
-      itemCodes.add(item.code);
-    });
-  });
-}
-
-export function compileScaleBank(intent: ScaleBankIntent): CompiledPlan {
-  validateIntent(intent);
+export function compileScaleBank(input: unknown): CompiledPlan {
+  const intent = parseScaleBankIntent(input);
   const sheet = intent.sheetName ?? "Scale Bank";
   const headers: CellValue[] = [
     "Construct Code",

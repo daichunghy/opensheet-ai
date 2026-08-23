@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "opensheet.plan.v1",
+  "planId": "conformance-literal-equals",
+  "source": { "module": "conformance", "version": "1" },
+  "target": { "workbook": "test-workbook" },
+  "operations": [
+    { "id": "ensure", "kind": "ensure-sheet", "sheet": "Data" },
+    {
+      "id": "write",
+      "kind": "write-range",
+      "sheet": "Data",
+      "range": "A1",
+      "values": [["=SUM(1)"]]
+    }
+  ],
+  "metadata": { "suite": "literal-equals" }
+}

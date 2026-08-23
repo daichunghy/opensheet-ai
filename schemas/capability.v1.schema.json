@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensheet-ai.dev/schemas/capability.v1.schema.json",
+  "title": "OpenSheet-AI Adapter Capability v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "adapterId",
+    "adapterVersion",
+    "planVersions",
+    "operations",
+    "dryRun",
+    "apply",
+    "snapshot",
+    "preconditions"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "opensheet.capability.v1" },
+    "adapterId": { "type": "string", "minLength": 1 },
+    "adapterVersion": { "type": "string", "minLength": 1 },
+    "planVersions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "const": "opensheet.plan.v1" }
+    },
+    "operations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ensure-sheet",
+        "write-range",
+        "write-formulas",
+        "set-data-validation",
+        "set-format",
+        "freeze-pane",
+        "set-column-widths"
+      ],
+      "properties": {
+        "ensure-sheet": { "$ref": "#/$defs/operationSupport" },
+        "write-range": { "$ref": "#/$defs/operationSupport" },
+        "write-formulas": { "$ref": "#/$defs/operationSupport" },
+        "set-data-validation": { "$ref": "#/$defs/operationSupport" },
+        "set-format": { "$ref": "#/$defs/operationSupport" },
+        "freeze-pane": { "$ref": "#/$defs/operationSupport" },
+        "set-column-widths": { "$ref": "#/$defs/operationSupport" }
+      }
+    },
+    "dryRun": { "type": "boolean" },
+    "apply": { "type": "boolean" },
+    "snapshot": { "type": "boolean" },
+    "preconditions": { "type": "boolean" }
+  },
+  "$defs": {
+    "operationSupport": { "enum": ["supported", "unsupported"] }
+  }
+}

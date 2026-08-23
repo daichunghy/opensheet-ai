@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { columnNumberToName, parseA1Range } from "../src/core/range.js";
+import { columnNumberToName, parseA1Range, parseColumnName } from "../src/core/range.js";
 
 describe("A1 range handling", () => {
   it("normalizes ranges and counts cells", () => {
@@ -26,5 +26,11 @@ describe("A1 range handling", () => {
     expect(() => parseA1Range("B2:A1")).toThrow(/top-left/);
     expect(() => parseA1Range("XFE1")).toThrow(/bounds/);
     expect(() => parseA1Range("A0")).toThrow(/Unsupported/);
+  });
+
+  it("rejects column names beyond XFD", () => {
+    expect(parseColumnName("XFD")).toBe(16_384);
+    expect(() => parseColumnName("XFE")).toThrow(/bounds/);
+    expect(() => parseColumnName("a")).toThrow(/Unsupported/);
   });
 });

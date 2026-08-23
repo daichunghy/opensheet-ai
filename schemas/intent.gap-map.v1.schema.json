@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opensheet-ai.dev/schemas/intent.gap-map.v1.schema.json",
+  "title": "OpenSheet-AI Gap Map Intent v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["module", "version", "workbook", "expected", "observed"],
+  "properties": {
+    "module": { "const": "gap-map" },
+    "version": { "const": 1 },
+    "workbook": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "sheetName": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "expected": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "name", "minimumItems"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "name": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "minimumItems": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "observed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["column", "constructCode", "itemCode"],
+        "properties": {
+          "column": { "type": "string", "pattern": "^[A-Z]{1,3}$" },
+          "constructCode": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "itemCode": { "type": "string", "minLength": 1, "maxLength": 500 }
+        }
+      }
+    }
+  }
+}

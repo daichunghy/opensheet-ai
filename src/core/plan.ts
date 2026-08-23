@@ -32,9 +32,10 @@ export function summarizePlan(plan: SheetPlan): PlanSummary {
 
 export function compilePlan(input: unknown): CompiledPlan {
   assertSheetPlan(input);
+  const plan = structuredClone(input);
   return {
-    plan: input,
-    digest: digestJson(input),
-    summary: summarizePlan(input),
+    plan,
+    digest: digestJson(plan),
+    summary: summarizePlan(plan),
   };
 }

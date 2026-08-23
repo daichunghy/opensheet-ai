@@ -1,0 +1,32 @@
+{
+  "module": "kpi-threshold",
+  "version": 1,
+  "workbook": "ops-demo",
+  "sheetName": "KPI Thresholds",
+  "kpis": [
+    {
+      "code": "NPS",
+      "name": "Net Promoter Score",
+      "actual": 42,
+      "target": 50,
+      "warnBelow": 45,
+      "unit": "score"
+    },
+    {
+      "code": "CSAT",
+      "name": "Customer satisfaction",
+      "actual": 4.6,
+      "target": 4.5,
+      "warnBelow": 4,
+      "unit": "1-5"
+    },
+    {
+      "code": "FILL",
+      "name": "Survey fill rate",
+      "actual": 0.71,
+      "target": 0.8,
+      "warnBelow": 0.6,
+      "unit": "share"
+    }
+  ]
+}

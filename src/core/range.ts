@@ -1,3 +1,5 @@
+import { ERROR_CODES, RangeParseError } from "./errors.js";
+
 const MAX_EXCEL_ROW = 1_048_576;
 const MAX_EXCEL_COLUMN = 16_384;
 
@@ -16,6 +18,20 @@ function columnNameToNumber(column: string): number {
   let value = 0;
   for (const character of column) {
     value = value * 26 + character.charCodeAt(0) - 64;
+  }
+  return value;
+}
+
+export function parseColumnName(column: string): number {
+  if (!/^[A-Z]{1,3}$/.test(column)) {
+    throw new RangeParseError(ERROR_CODES.invalid_range, `Unsupported column name: ${column}`);
+  }
+  const value = columnNameToNumber(column);
+  if (value < 1 || value > MAX_EXCEL_COLUMN) {
+    throw new RangeParseError(
+      ERROR_CODES.range_bounds_exceeded,
+      `Column exceeds Excel-compatible bounds: ${column}`,
+    );
   }
   return value;
 }
@@ -42,13 +58,13 @@ export function parseA1Range(input: string): ParsedRange {
   );
 
   if (!match) {
-    throw new RangeError(`Unsupported A1 range: ${input}`);
+    throw new RangeParseError(ERROR_CODES.invalid_range, `Unsupported A1 range: ${input}`);
   }
 
   const startColumnName = match[1];
   const startRowText = match[2];
   if (!startColumnName || !startRowText) {
-    throw new RangeError(`Unsupported A1 range: ${input}`);
+    throw new RangeParseError(ERROR_CODES.invalid_range, `Unsupported A1 range: ${input}`);
   }
 
   const endColumnName = match[3] ?? startColumnName;
@@ -64,11 +80,17 @@ export function parseA1Range(input: string): ParsedRange {
     startRow > MAX_EXCEL_ROW ||
     endRow > MAX_EXCEL_ROW
   ) {
-    throw new RangeError(`Range exceeds Excel-compatible bounds: ${input}`);
+    throw new RangeParseError(
+      ERROR_CODES.range_bounds_exceeded,
+      `Range exceeds Excel-compatible bounds: ${input}`,
+    );
   }
 
   if (endColumn < startColumn || endRow < startRow) {
-    throw new RangeError(`Range must run from top-left to bottom-right: ${input}`);
+    throw new RangeParseError(
+      ERROR_CODES.range_reversed,
+      `Range must run from top-left to bottom-right: ${input}`,
+    );
   }
 
   const rowCount = endRow - startRow + 1;

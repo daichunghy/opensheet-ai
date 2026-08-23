@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "opensheet.plan.v1",
+  "planId": "conformance-ensure-write",
+  "source": { "module": "conformance", "version": "1" },
+  "target": { "workbook": "test-workbook" },
+  "operations": [
+    { "id": "ensure", "kind": "ensure-sheet", "sheet": "Data" },
+    {
+      "id": "write",
+      "kind": "write-range",
+      "sheet": "Data",
+      "range": "A1:B2",
+      "values": [
+        ["Name", "Score"],
+        ["A", 5]
+      ]
+    },
+    {
+      "id": "freeze",
+      "kind": "freeze-pane",
+      "sheet": "Data",
+      "rows": 1,
+      "columns": 0
+    },
+    {
+      "id": "widths",
+      "kind": "set-column-widths",
+      "sheet": "Data",
+      "widths": [{ "column": "A", "width": 18 }]
+    }
+  ],
+  "metadata": { "suite": "ensure-write" }
+}

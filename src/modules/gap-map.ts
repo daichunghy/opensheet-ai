@@ -1,6 +1,7 @@
 import { digestJson } from "../core/canonical.js";
 import { compilePlan } from "../core/plan.js";
 import type { CellValue, CompiledPlan, SheetPlan } from "../core/types.js";
+import { parseGapMapIntent } from "./intent.js";
 
 export interface ExpectedConstruct {
   readonly code: string;
@@ -23,47 +24,8 @@ export interface GapMapIntent {
   readonly observed: readonly ObservedColumn[];
 }
 
-function validateIntent(intent: GapMapIntent): void {
-  if (intent.module !== "gap-map" || intent.version !== 1) {
-    throw new TypeError("Gap map intent must use module 'gap-map' and version 1.");
-  }
-  if (intent.workbook.trim().length === 0) {
-    throw new TypeError("Gap map intent requires a workbook id.");
-  }
-  if (intent.expected.length === 0) {
-    throw new TypeError("Gap map intent requires at least one expected construct.");
-  }
-  const expectedCodes = new Set<string>();
-  intent.expected.forEach((construct) => {
-    if (construct.code.trim().length === 0 || construct.name.trim().length === 0) {
-      throw new TypeError("Expected construct code and name must not be blank.");
-    }
-    if (!Number.isInteger(construct.minimumItems) || construct.minimumItems < 1) {
-      throw new TypeError(`Construct ${construct.code} requires minimumItems >= 1.`);
-    }
-    if (expectedCodes.has(construct.code)) {
-      throw new TypeError(`Duplicate expected construct code: ${construct.code}`);
-    }
-    expectedCodes.add(construct.code);
-  });
-
-  const observedColumns = new Set<string>();
-  intent.observed.forEach((column) => {
-    if (!/^[A-Z]{1,3}$/.test(column.column)) {
-      throw new TypeError(`Observed column '${column.column}' must be an uppercase A1 column name.`);
-    }
-    if (column.constructCode.trim().length === 0 || column.itemCode.trim().length === 0) {
-      throw new TypeError("Observed construct and item codes must not be blank.");
-    }
-    if (observedColumns.has(column.column)) {
-      throw new TypeError(`Observed column appears more than once: ${column.column}`);
-    }
-    observedColumns.add(column.column);
-  });
-}
-
-export function compileGapMap(intent: GapMapIntent): CompiledPlan {
-  validateIntent(intent);
+export function compileGapMap(input: unknown): CompiledPlan {
+  const intent = parseGapMapIntent(input);
   const sheet = intent.sheetName ?? "Gap Map";
   const observedByConstruct = new Map<string, ObservedColumn[]>();
   intent.observed.forEach((column) => {
@@ -90,7 +52,7 @@ export function compileGapMap(intent: GapMapIntent): CompiledPlan {
   const expectedCodes = new Set(intent.expected.map((construct) => construct.code));
   const unexpectedRows: CellValue[][] = [...observedByConstruct.entries()]
     .filter(([constructCode]) => !expectedCodes.has(constructCode))
-    .sort(([left], [right]) => left.localeCompare(right))
+    .sort(([left], [right]) => (left < right ? -1 : left > right ? 1 : 0))
     .map(([constructCode, observed]) => [
       constructCode,
       "Unmapped construct",

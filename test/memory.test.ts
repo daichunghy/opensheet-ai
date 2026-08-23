@@ -39,7 +39,10 @@ describe("in-memory adapter", () => {
         },
       ],
     };
-    const result = executeInMemory(plan, createEmptyWorkbook(), { dryRun: false, now: fixedNow });
+    const result = executeInMemory(plan, createEmptyWorkbook("test-workbook"), {
+      dryRun: false,
+      now: fixedNow,
+    });
     expect(result.receipt.status).toBe("blocked");
     expect(result.workbook.sheets).toEqual({});
   });
