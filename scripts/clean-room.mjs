@@ -30,6 +30,7 @@ const requiredFiles = [
 ];
 
 const importProbe = `
+  const fs = await import("node:fs");
   const modules = {
     root: await import("opensheet-ai"),
     memory: await import("opensheet-ai/memory"),
@@ -72,6 +73,15 @@ const importProbe = `
   if (modules.xlsx.XLSX_CAPABILITY.adapterId !== "opensheet-ai/xlsx") {
     throw new Error("XLSX capability identity is not package-stable");
   }
+  const xlsxPath = process.cwd() + "/clean-room-smoke.xlsx";
+  const xlsxResult = await modules.xlsx.executeXlsx(compiled.plan, {
+    outputPath: xlsxPath,
+    dryRun: false,
+    now: () => "2026-08-24T00:00:00.000Z",
+  });
+  if (xlsxResult.receipt.status !== "applied" || !fs.existsSync(xlsxPath)) {
+    throw new Error("XLSX public export did not write an applied clean-room workbook");
+  }
 `;
 
 let directory;
@@ -102,7 +112,6 @@ try {
     "npm",
     [
       "install",
-      "--offline",
       "--ignore-scripts",
       "--no-audit",
       "--no-fund",
@@ -115,7 +124,7 @@ try {
     { cwd: directory, encoding: "utf8" },
   );
   if (install.status !== 0) {
-    throw new Error(`${install.stderr || ""}${install.stdout || ""}offline package install failed`);
+    throw new Error(`${install.stderr || ""}${install.stdout || ""}package install failed`);
   }
 
   const packageRoot = join(consumerRoot, "node_modules", "opensheet-ai");
