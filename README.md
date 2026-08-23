@@ -6,6 +6,10 @@ The project is deliberately not another spreadsheet chatbot or a direct-write MC
 
 **Status:** public alpha (`0.1.0-alpha.5`). The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
 
+> If a dry-run receipt caught a wrong range before it reached a workbook,
+> [star it](https://github.com/daichunghy/opensheet-ai/stargazers). That is the
+> only growth signal this repo tracks.
+
 ## Install from npm
 
 Install the public alpha from the npm registry:
@@ -104,6 +108,19 @@ OpenSheet-AI plans and governs mutations. The `.xlsx` adapter writes a new workb
 This alpha proves local/package behavior through `npm run verify`, including schema reconciliation, clean-room installation, CLI smoke tests, conformance fixtures, and local quickstart sessions. Those checks are not evidence of external users or production integrations.
 
 See [quick start](docs/QUICKSTART.md), [the product specification](docs/PRODUCT_SPEC.md), [architecture](docs/ARCHITECTURE.md), [implementation plan](docs/IMPLEMENTATION_PLAN.md), [compatibility](docs/COMPATIBILITY.md), [threat model](docs/THREAT_MODEL.md), and [landscape research](docs/research/2026-08-22-landscape.md).
+
+## Who this is for
+
+- Operators who rebuild the same spreadsheet deliverables by hand and want a
+  reviewable, versioned plan with a dry-run receipt instead of one-shot
+  generation.
+- Agent builders who need a deterministic spreadsheet layer behind a model
+  frontend.
+- Not a fit if you need Google Sheets, Excel desktop writes, or formula
+  recalculation in this alpha.
+
+If a dry-run receipt caught a wrong range for you, star the repository. It
+helps other operators find the protocol.
 
 ## License
 
