@@ -1,6 +1,6 @@
 {
   "name": "opensheet-ai",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "Provider-neutral plans, policy gates, and receipts for agent-driven spreadsheet automation.",
   "license": "Apache-2.0",
   "private": false,

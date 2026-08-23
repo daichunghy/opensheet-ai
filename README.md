@@ -6,10 +6,16 @@ The project is deliberately not another spreadsheet chatbot or a direct-write MC
 
 **Status:** public alpha candidate (`0.1.0-alpha.1`). The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
 
-## Install
+## Install from the public source
+
+The npm alpha is prepared but registry publication is pending npm OTP
+verification. Use the verified GitHub tag meanwhile:
 
 ```bash
-npm install opensheet-ai@alpha
+git clone --branch v0.1.0-alpha.2 https://github.com/daichunghy/opensheet-ai.git
+cd opensheet-ai
+npm ci
+npm run verify
 ```
 
 The package targets Node.js 20 and 22. The GitHub repository is the source of truth for the release, compatibility notes, and issue reporting.
