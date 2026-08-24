@@ -45,6 +45,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "first-use": "npm run build && npm run check:quickstart",
     "prepack": "npm run build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",

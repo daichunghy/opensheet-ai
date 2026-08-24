@@ -8,7 +8,7 @@ spreadsheet account, or existing workbook is required for this path.
 
 ```bash
 npm ci
-npm run build
+npm run first-use
 node dist/cli.js compile examples/scale-bank.json > /tmp/opensheet-plan.json
 node dist/cli.js validate /tmp/opensheet-plan.json
 node dist/cli.js apply-memory /tmp/opensheet-plan.json
