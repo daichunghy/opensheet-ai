@@ -1,10 +1,10 @@
 # OpenSheet-AI
 
-OpenSheet-AI is a provider-neutral plan-and-execution protocol for agent-driven spreadsheet automation. It converts typed business intents into deterministic spreadsheet operations, checks those operations against an explicit policy, supports dry-run previews, and emits machine-readable receipts.
+OpenSheet-AI turns a typed spreadsheet change into a validated plan, a dry-run receipt, or a new `.xlsx` file. It is for agents and tools that need a deterministic write boundary instead of sending model output directly to a workbook.
 
 The project is deliberately not another spreadsheet chatbot or a direct-write MCP server. Model providers, MCP servers, Excel, Google Sheets, ERP connectors, and quantitative engines belong at the edges. The core remains deterministic and testable without credentials, network access, or an LLM.
 
-**Status:** public alpha (`0.1.0-alpha.5`). The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
+**Live status (2026-08-24):** public alpha (`0.1.0-alpha.5` on GitHub, 0 stars, 0 forks). No external user, downstream repository, or pilot is verified. The npm `alpha` and `latest` dist-tags currently resolve `0.1.0-alpha.4`. The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
 
 > If a dry-run receipt caught a wrong range before it reached a workbook,
 > [star it](https://github.com/daichunghy/opensheet-ai/stargazers). That is the
@@ -36,6 +36,8 @@ The package targets Node.js 20 and 22. The GitHub repository is the source of tr
 Support and first-run questions: [`.github/SUPPORT.md`](.github/SUPPORT.md) or [GitHub Discussions](https://github.com/daichunghy/opensheet-ai/discussions).
 For a consented human walkthrough, use the [35-minute session invite](docs/sessions/INVITE-EN.md)
 and [session protocol](docs/sessions/PROTOCOL.md).
+
+The shortest route to a concrete artifact is the [first-use walkthrough](docs/first-use.md).
 
 ## Current vertical slice
 

@@ -1,5 +1,7 @@
 # Quick start
 
+For the shortest user-facing path, start with [First use](first-use.md).
+
 Public alpha package `opensheet-ai@0.1.0-alpha.5`. Node 20 or 22.
 
 ```bash
