@@ -25,6 +25,19 @@ import {
   type MemorySheet,
   type MemoryWorkbook,
 } from "./memory.js";
+import {
+  createXlsxInputReadDiagnostic,
+  type XlsxInputReadDiagnostic,
+} from "./xlsx-diagnostics.js";
+
+export {
+  XLSX_INPUT_READ_FAILURE_CODE,
+  createXlsxInputReadDiagnostic,
+} from "./xlsx-diagnostics.js";
+export type {
+  XlsxInputReadDiagnostic,
+  XlsxInputReadFailureReason,
+} from "./xlsx-diagnostics.js";
 
 interface ExcelValidationModel {
   type?: string;
@@ -104,6 +117,7 @@ export interface XlsxExecutionResult {
   readonly workbook: MemoryWorkbook;
   readonly snapshot: WorkbookSnapshot;
   readonly receipt: ExecutionReceipt;
+  readonly diagnostic?: XlsxInputReadDiagnostic;
 }
 
 function hexToArgb(color: string): string {
@@ -453,16 +467,26 @@ export async function executeXlsx(
       const findings =
         error && typeof error === "object" && "findings" in error
           ? ((error as { findings: readonly PolicyFinding[] }).findings)
-          : [
-              {
-                code: "unsupported_workbook_feature",
-                message: error instanceof Error ? error.message : "Failed to read workbook.",
-              },
-            ];
+          : undefined;
+      if (findings) {
+        return {
+          workbook: empty,
+          snapshot: snapshotMemoryWorkbook(empty),
+          receipt: blocked(compiled.plan, compiled.digest, findings, executedAt, receiptInput),
+        };
+      }
+      const diagnostic = createXlsxInputReadDiagnostic(options.inputPath, error);
       return {
         workbook: empty,
         snapshot: snapshotMemoryWorkbook(empty),
-        receipt: blocked(compiled.plan, compiled.digest, findings, executedAt, receiptInput),
+        diagnostic,
+        receipt: blocked(
+          compiled.plan,
+          compiled.digest,
+          [{ code: diagnostic.code, message: diagnostic.message }],
+          executedAt,
+          receiptInput,
+        ),
       };
     }
     const existingNames = Object.keys(input.sheets);
