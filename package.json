@@ -1,7 +1,7 @@
 {
   "name": "opensheet-ai",
   "version": "0.1.0-alpha.5",
-  "description": "Provider-neutral plans, policy gates, and receipts for agent-driven spreadsheet automation.",
+  "description": "Turns typed spreadsheet changes into validated plans, dry-run receipts, and new XLSX files.",
   "license": "Apache-2.0",
   "private": false,
   "repository": {
@@ -45,6 +45,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "first-use": "npm run build && npm run check:quickstart",
     "prepack": "npm run build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
