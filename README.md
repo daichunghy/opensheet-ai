@@ -50,7 +50,7 @@ and [session protocol](docs/sessions/PROTOCOL.md).
 - CLI for compile, validate, in-memory preview/apply, greenfield `.xlsx` apply, and receipt verification;
 - research modules (scale bank, gap map) plus a KPI threshold table.
 
-F1 hardens the contract. F2 adds a **greenfield `.xlsx` writer** (`opensheet-ai/xlsx`, ExcelJS). It writes a new file, fails closed on unsupported input features, and does not claim Google Sheets, Excel desktop, or formula recalculation. The package targets Node.js 20 and 22 (`engines.node` is `>=20 <23`). Execution helpers live on `opensheet-ai/memory` and `opensheet-ai/xlsx`, not the root export.
+F1 hardens the contract. F2 adds a **greenfield `.xlsx` writer** (`opensheet-ai/xlsx`, ExcelJS). It writes a new file, fails closed on unsupported input features, reports missing or unreadable input as `xlsx_input_read_failed` ([diagnostic reference](docs/XLSX_INPUT_DIAGNOSTICS.md)), and does not claim Google Sheets, Excel desktop, or formula recalculation. The package targets Node.js 20 and 22 (`engines.node` is `>=20 <23`). Execution helpers live on `opensheet-ai/memory` and `opensheet-ai/xlsx`, not the root export.
 
 ## Quick start
 

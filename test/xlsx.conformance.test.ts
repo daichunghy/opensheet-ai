@@ -178,6 +178,56 @@ describe("xlsx adapter", () => {
     expect(result.receipt.findings.some((finding) => finding.code === "unsupported_workbook_feature")).toBe(
       true,
     );
+    expect(result.diagnostic).toBeUndefined();
+  });
+
+  it("reports a missing input workbook as a typed read failure", async () => {
+    const inputPath = await tempFile("missing.xlsx");
+    const result = await executeXlsx(basePlan(), {
+      inputPath,
+      outputPath: await tempFile("missing-output.xlsx"),
+      dryRun: false,
+      now: fixedNow,
+      allowedSheets: ["Data"],
+    });
+
+    expect(result.receipt.status).toBe("blocked");
+    expect(result.receipt.findings).toEqual([
+      expect.objectContaining({ code: "xlsx_input_read_failed" }),
+    ]);
+    expect(result.diagnostic).toMatchObject({
+      type: "xlsx_input_read_failure",
+      code: "xlsx_input_read_failed",
+      reason: "missing",
+      path: inputPath,
+    });
+  });
+
+  it("reports a corrupt input workbook without calling it an unsupported feature", async () => {
+    const inputPath = await tempFile("corrupt.xlsx");
+    const { writeFile } = await import("node:fs/promises");
+    await writeFile(inputPath, "not an xlsx archive", "utf8");
+    const result = await executeXlsx(basePlan(), {
+      inputPath,
+      outputPath: await tempFile("corrupt-output.xlsx"),
+      dryRun: false,
+      now: fixedNow,
+      allowedSheets: ["Data"],
+    });
+
+    expect(result.receipt.status).toBe("blocked");
+    expect(result.receipt.findings).toEqual([
+      expect.objectContaining({ code: "xlsx_input_read_failed" }),
+    ]);
+    expect(result.receipt.findings.some((finding) => finding.code === "unsupported_workbook_feature")).toBe(
+      false,
+    );
+    expect(result.diagnostic).toMatchObject({
+      type: "xlsx_input_read_failure",
+      code: "xlsx_input_read_failed",
+      reason: "invalid_workbook",
+      path: inputPath,
+    });
   });
 
   it("blocks stale range preconditions", async () => {
