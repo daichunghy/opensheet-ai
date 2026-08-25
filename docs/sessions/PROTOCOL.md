@@ -1,9 +1,18 @@
 # Protocol 35 phút
 
 **Mode A (tuần này):** Hy share màn hình, khách nói.  
-**Mode B:** khách `tar -xzf opensheet-ai-session.tgz && cd Github\ 3 && npm ci && npm run build` rồi tự gõ; Hy hỗ trợ.
+**Mode B:** khách clone tag public, cài dependencies trong clone của họ rồi tự gõ; Hy hỗ trợ.
 
-Máy Hy: Node 20 hoặc 22. Máy local đang 25 vẫn chạy được nhưng `engines` ghi `<23` — nói thật nếu hỏi.
+```bash
+git clone --branch v0.1.0-alpha.5 https://github.com/daichunghy/opensheet-ai.git /tmp/opensheet-ai-session
+cd /tmp/opensheet-ai-session
+npm ci
+npm run build
+```
+
+Có thể dùng public npm package trong một thư mục consumer riêng nếu không cần chạy các file example trong repository. Không dùng đường dẫn local của maintainer. Walkthrough này là usability feedback, chưa phải bằng chứng external adoption.
+
+Package nhắm Node 20 hoặc 22 theo `engines`.
 
 ## 0:00–0:03 đồng ý
 
@@ -22,7 +31,7 @@ Hy **không** giải thích trước từng cờ. Hỏi: “Bạn muốn chạy 
 Lệnh tối thiểu (Hy gõ nếu Mode A):
 
 ```bash
-cd "/Users/macos/Desktop/Github 3"
+cd /tmp/opensheet-ai-session
 node dist/cli.js compile examples/kpi-threshold.json
 node dist/cli.js compile examples/scale-bank.json > /tmp/os-plan.json
 node dist/cli.js validate /tmp/os-plan.json
@@ -46,4 +55,4 @@ Hỏi đúng 3 câu:
 
 Cảm ơn. Không xin star. Hẹn gửi 5 dòng tóm tắt nếu họ muốn.
 
-**Pass:** họ hoàn thành compile → validate → dry-run receipt → file xlsx, **không** cần Hy gợi lệnh (Mode B) hoặc họ chỉ đường cho Hy gõ (Mode A).
+**Pass:** họ hoàn thành compile → validate → dry-run receipt → file xlsx, **không** cần Hy gợi lệnh (Mode B) hoặc họ chỉ đường cho Hy gõ (Mode A). Kết quả này vẫn chỉ là walkthrough feedback, không phải adoption evidence.
