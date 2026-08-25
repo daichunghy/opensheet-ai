@@ -51,6 +51,7 @@
     "test:watch": "vitest",
     "check:pack": "node scripts/check-pack.mjs",
     "check:schema": "node scripts/check-schema.mjs",
+    "check:errors": "node scripts/check-error-reference.mjs",
     "check:budget": "node scripts/measure-budget.mjs",
     "check:secrets": "node scripts/check-secrets.mjs",
     "check:smoke": "node scripts/cli-smoke.mjs",
@@ -58,7 +59,7 @@
     "check:conformance": "node scripts/conformance.mjs",
     "check:quickstart": "node scripts/quickstart-sessions.mjs",
     "pack:session": "node scripts/pack-session.mjs",
-    "verify": "npm run typecheck && npm run build && npm run test && npm run check:schema && npm run check:budget && npm run check:pack && npm run check:secrets && npm run check:smoke && npm run check:clean-room && npm run check:conformance && npm run check:quickstart"
+    "verify": "npm run typecheck && npm run build && npm run test && npm run check:schema && npm run check:errors && npm run check:budget && npm run check:pack && npm run check:secrets && npm run check:smoke && npm run check:clean-room && npm run check:conformance && npm run check:quickstart"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
