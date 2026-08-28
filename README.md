@@ -18,9 +18,17 @@ Install the public alpha from the npm registry:
 npm install opensheet-ai@alpha
 ```
 
-The GitHub source is `0.1.0-alpha.5`; the npm `alpha` dist-tag currently resolves `0.1.0-alpha.4`
-until the alpha.5 publication completes. Check the registry metadata before recording a consumer
-install as evidence.
+The GitHub source is `0.1.0-alpha.5`; npm currently resolves the older
+`0.1.0-alpha.4` until the prepared alpha.5 publication completes. After that
+publication, the shortest first result is:
+
+```bash
+npm install --save-exact opensheet-ai@0.1.0-alpha.5
+npx opensheet-ai preview node_modules/opensheet-ai/examples/inventory-revenue/intent.json --format text
+```
+
+This prints the plan, receipt status, and next step before writing a workbook.
+Check registry metadata before recording a consumer install as evidence.
 
 ## Verify from source
 
@@ -109,6 +117,10 @@ OpenSheet-AI plans and governs mutations. The `.xlsx` adapter writes a new workb
 This alpha proves local/package behavior through `npm run verify`, including schema reconciliation, clean-room installation, CLI smoke tests, conformance fixtures, and local quickstart sessions. Those checks are not evidence of external users or production integrations.
 
 See [quick start](docs/QUICKSTART.md), [the product specification](docs/PRODUCT_SPEC.md), [architecture](docs/ARCHITECTURE.md), [implementation plan](docs/IMPLEMENTATION_PLAN.md), [compatibility](docs/COMPATIBILITY.md), [threat model](docs/THREAT_MODEL.md), and [landscape research](docs/research/2026-08-22-landscape.md).
+
+Agent-assisted changes follow the [verification map](docs/agent-verification-map.md) and [evaluation protocol](docs/agent-evaluation-protocol.md). Run `npm run agent-eval -- OS-01` for a manifest-backed local acceptance task.
+
+The current local evidence is recorded in the [agent scaling checkpoint](docs/agent-scaling-checkpoint.md).
 
 ## Who this is for
 
