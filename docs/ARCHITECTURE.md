@@ -145,7 +145,7 @@ Preconditions (sheet existence, workbook digest, range-state digest) are evaluat
 
 ## 6. Adapter contract
 
-Adapters implement `SheetAdapter` (`src/core/adapter.ts`): `capability`, `snapshot`, `preflight`, `preview`, `apply`. The package root does not export memory types. Import `opensheet-ai/memory` for `executeInMemory` and `memoryAdapter`.
+Adapters implement the public `SheetAdapter` contract (`src/core/adapter.ts`): `capability`, `snapshot`, `preflight`, `preview`, `apply`. The package root does not export memory types. Consumers should import `memoryAdapter` from `opensheet-ai/memory` and call `preview` or `apply`; the lower-level `executeInMemory` helper is not the adapter boundary.
 
 `executeInMemory` is the in-memory implementation. `executeXlsx` maps that result to a new `.xlsx` file through ExcelJS and read-back. It is not Google Sheets, Excel desktop, or a formula engine. Sequence:
 

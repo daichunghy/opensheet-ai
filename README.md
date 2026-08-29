@@ -1,10 +1,10 @@
 # OpenSheet-AI
 
-OpenSheet-AI is a provider-neutral plan-and-execution protocol for agent-driven spreadsheet automation. It converts typed business intents into deterministic spreadsheet operations, checks those operations against an explicit policy, supports dry-run previews, and emits machine-readable receipts.
+OpenSheet-AI turns a typed spreadsheet change into a validated plan, a dry-run receipt, or a new `.xlsx` file. It is for agents and tools that need a deterministic write boundary instead of sending model output directly to a workbook.
 
 The project is deliberately not another spreadsheet chatbot or a direct-write MCP server. Model providers, MCP servers, Excel, Google Sheets, ERP connectors, and quantitative engines belong at the edges. The core remains deterministic and testable without credentials, network access, or an LLM.
 
-**Status:** public alpha (`0.1.0-alpha.5`). The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
+**Live status (2026-08-24):** public alpha (`0.1.0-alpha.5` on GitHub, 0 stars, 0 forks). No external user, downstream repository, or pilot is verified. The npm `alpha` and `latest` dist-tags currently resolve `0.1.0-alpha.4`. The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
 
 > If a dry-run receipt caught a wrong range before it reached a workbook,
 > [star it](https://github.com/daichunghy/opensheet-ai/stargazers). That is the
@@ -37,6 +37,8 @@ Support and first-run questions: [`.github/SUPPORT.md`](.github/SUPPORT.md) or [
 For a consented human walkthrough, use the [35-minute session invite](docs/sessions/INVITE-EN.md)
 and [session protocol](docs/sessions/PROTOCOL.md).
 
+The shortest route to a concrete artifact is the [first-use walkthrough](docs/first-use.md).
+
 ## Current vertical slice
 
 - versioned `opensheet.plan.v1` operation contract;
@@ -50,7 +52,7 @@ and [session protocol](docs/sessions/PROTOCOL.md).
 - CLI for compile, validate, in-memory preview/apply, greenfield `.xlsx` apply, and receipt verification;
 - research modules (scale bank, gap map) plus a KPI threshold table.
 
-F1 hardens the contract. F2 adds a **greenfield `.xlsx` writer** (`opensheet-ai/xlsx`, ExcelJS). It writes a new file, fails closed on unsupported input features, and does not claim Google Sheets, Excel desktop, or formula recalculation. The package targets Node.js 20 and 22 (`engines.node` is `>=20 <23`). Execution helpers live on `opensheet-ai/memory` and `opensheet-ai/xlsx`, not the root export.
+F1 hardens the contract. F2 adds a **greenfield `.xlsx` writer** (`opensheet-ai/xlsx`, ExcelJS). It writes a new file, fails closed on unsupported input features, reports missing or unreadable input as `xlsx_input_read_failed` ([diagnostic reference](docs/XLSX_INPUT_DIAGNOSTICS.md)), and does not claim Google Sheets, Excel desktop, or formula recalculation. The package targets Node.js 20 and 22 (`engines.node` is `>=20 <23`). Execution helpers live on `opensheet-ai/memory` and `opensheet-ai/xlsx`, not the root export.
 
 ## Quick start
 
@@ -77,7 +79,7 @@ node dist/cli.js apply-memory /tmp/opensheet-plan.json
 
 ```ts
 import { compileScaleBank } from "opensheet-ai";
-import { createEmptyWorkbook, executeInMemory } from "opensheet-ai/memory";
+import { createEmptyWorkbook, memoryAdapter } from "opensheet-ai/memory";
 
 const compiled = compileScaleBank({
   module: "scale-bank",
@@ -93,8 +95,7 @@ const compiled = compileScaleBank({
   ],
 });
 
-const result = executeInMemory(compiled.plan, createEmptyWorkbook("research-demo"), {
-  dryRun: true,
+const result = memoryAdapter.preview(compiled.plan, createEmptyWorkbook("research-demo"), {
   now: () => "2026-08-22T00:00:00.000Z",
 });
 

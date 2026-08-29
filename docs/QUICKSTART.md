@@ -1,5 +1,7 @@
 # Quick start
 
+For the shortest user-facing path, start with [First use](first-use.md).
+
 Public alpha package `opensheet-ai@0.1.0-alpha.5`. Node 20 or 22.
 
 ```bash
@@ -19,10 +21,10 @@ Library:
 
 ```ts
 import { compileScaleBank } from "opensheet-ai";
-import { createEmptyWorkbook, executeInMemory } from "opensheet-ai/memory";
+import { createEmptyWorkbook, memoryAdapter } from "opensheet-ai/memory";
 import { executeXlsx } from "opensheet-ai/xlsx";
 ```
 
-For a published consumer, import from `opensheet-ai`; use `dist/` only when working from this repository.
+For a published consumer, import from `opensheet-ai` and `opensheet-ai/memory`; use `dist/` only when working from this repository.
 
 A session is successful when: compile emits `opensheet.plan.v1`, validate prints a `sha256:` digest, dry-run receipt status is `dry-run`, and `--apply` for xlsx creates a file whose cells match the plan literals.

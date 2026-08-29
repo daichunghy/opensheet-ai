@@ -1,7 +1,7 @@
 {
   "name": "opensheet-ai",
   "version": "0.1.0-alpha.5",
-  "description": "Provider-neutral plans, policy gates, and receipts for agent-driven spreadsheet automation.",
+  "description": "Turns typed spreadsheet changes into validated plans, dry-run receipts, and new XLSX files.",
   "license": "Apache-2.0",
   "private": false,
   "repository": {
@@ -45,6 +45,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "first-use": "npm run build && npm run check:quickstart",
     "prepack": "npm run build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
@@ -52,6 +53,7 @@
     "check:pack": "node scripts/check-pack.mjs",
     "check:schema": "node scripts/check-schema.mjs",
     "check:adapter-errors": "node scripts/check-adapter-error-reference.mjs",
+    "check:errors": "node scripts/check-error-reference.mjs",
     "check:budget": "node scripts/measure-budget.mjs",
     "check:secrets": "node scripts/check-secrets.mjs",
     "check:smoke": "node scripts/cli-smoke.mjs",
@@ -59,7 +61,7 @@
     "check:conformance": "node scripts/conformance.mjs",
     "check:quickstart": "node scripts/quickstart-sessions.mjs",
     "pack:session": "node scripts/pack-session.mjs",
-    "verify": "npm run typecheck && npm run build && npm run test && npm run check:schema && npm run check:adapter-errors && npm run check:budget && npm run check:pack && npm run check:secrets && npm run check:smoke && npm run check:clean-room && npm run check:conformance && npm run check:quickstart"
+    "verify": "npm run typecheck && npm run build && npm run test && npm run check:schema && npm run check:adapter-errors && npm run check:errors && npm run check:budget && npm run check:pack && npm run check:secrets && npm run check:smoke && npm run check:clean-room && npm run check:conformance && npm run check:quickstart"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
