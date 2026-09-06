@@ -4,7 +4,7 @@ OpenSheet-AI turns a typed spreadsheet change into a validated plan, a dry-run r
 
 The project is deliberately not another spreadsheet chatbot or a direct-write MCP server. Model providers, MCP servers, Excel, Google Sheets, ERP connectors, and quantitative engines belong at the edges. The core remains deterministic and testable without credentials, network access, or an LLM.
 
-**Live status (2026-09-01):** public alpha (`0.1.0-alpha.5` on GitHub, 1 star, 0 forks). No external user, downstream repository, or pilot is verified. The public npm page currently shows `0.1.0-alpha.4`; check the registry before recording a newer tag as published. The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
+**Live status (2026-09-06):** public alpha (`0.1.0-alpha.5` on GitHub and npm, 1 GitHub star, 0 forks). No external consumer repository or pilot is verified yet. The npm `alpha` and `latest` dist-tags both resolve `0.1.0-alpha.5`, and the published tarball ships the packaged examples. The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
 
 > If a dry-run receipt caught a wrong range before it reached a workbook,
 > [star it](https://github.com/daichunghy/opensheet-ai/stargazers). That is the
@@ -18,9 +18,8 @@ Install the public alpha from the npm registry:
 npm install opensheet-ai@alpha
 ```
 
-The GitHub source is `0.1.0-alpha.5`; npm currently resolves the older
-`0.1.0-alpha.4` until the prepared alpha.5 publication completes. After that
-publication, the shortest first result is:
+The published `0.1.0-alpha.5` tarball includes the packaged examples, so the
+shortest first result is:
 
 ```bash
 npm install --save-exact opensheet-ai@0.1.0-alpha.5
