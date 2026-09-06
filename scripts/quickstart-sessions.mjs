@@ -38,14 +38,41 @@ async function session(label, example) {
   };
 }
 
+async function previewSession(example) {
+  const preview = JSON.parse(run(["preview", example]));
+  if (
+    preview.receipt?.status !== "dry-run" ||
+    preview.receipt?.afterDigest !== preview.receipt?.beforeDigest ||
+    preview.receipt?.projectedAfterDigest === preview.receipt?.afterDigest
+  ) {
+    throw new Error(`preview session failed for ${example}`);
+  }
+  return {
+    host: "local-operator",
+    external: false,
+    example,
+    digest: preview.planDigest,
+    previewStatus: preview.receipt.status,
+    xlsxWritten: false,
+    directPreview: true,
+  };
+}
+
 const reports = [
   await session("session-1", "examples/scale-bank.json"),
   await session("session-2", "examples/gap-map.json"),
+  await session("session-3", "examples/inventory-revenue/intent.json"),
+  await session("session-4", "examples/service-quality/intent.json"),
+  await previewSession("examples/service-quality/intent.json"),
 ];
 await rm(directory, { recursive: true, force: true });
 
-if (reports.some((item) => item.previewStatus !== "dry-run" || !item.xlsxWritten)) {
+if (reports.slice(0, 4).some((item) => item.previewStatus !== "dry-run" || !item.xlsxWritten)) {
   process.stderr.write("quickstart sessions failed\n");
+  process.exit(1);
+}
+if (reports[4]?.previewStatus !== "dry-run" || reports[4].directPreview !== true) {
+  process.stderr.write("direct preview session failed\n");
   process.exit(1);
 }
 

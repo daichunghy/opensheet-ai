@@ -35,3 +35,6 @@ without attaching private workbook data or credentials.
 
 This path proves a local adapter workflow. It does not prove external users,
 production spreadsheet integrations, or statistical validity.
+
+For package release, consumer updates, and rollback, see
+[release-and-rollback.md](release-and-rollback.md).

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "evidenceBoundary": "local workflow evidence only",
+  "tasks": [
+    { "id": "OS-01", "title": "Plan/schema contract", "paths": ["src/core", "schemas", "test/schema-reconciliation.test.ts"], "commands": ["npm run check:schema", "npm run typecheck"], "owner": "contract", "risk": "high", "humanReview": true },
+    { "id": "OS-02", "title": "Deterministic module compiler", "paths": ["src/modules", "src/core/canonical.ts", "test/modules.test.ts", "test/canonical.test.ts"], "commands": ["npm run test", "npm run typecheck"], "owner": "compiler", "risk": "high", "humanReview": true },
+    { "id": "OS-03", "title": "Policy and formula boundary", "paths": ["src/core", "test/policy.test.ts", "test/validation.test.ts"], "commands": ["npm run test", "npm run check:errors"], "owner": "policy", "risk": "critical", "humanReview": true },
+    { "id": "OS-04", "title": "Memory dry-run/apply", "paths": ["src/adapters/memory.ts", "src/core/adapter.ts", "test/idempotency.test.ts", "test/preconditions.test.ts"], "commands": ["npm run test", "npm run check:conformance"], "owner": "adapter", "risk": "critical", "humanReview": true },
+    { "id": "OS-05", "title": "XLSX write/read-back", "paths": ["src/adapters/xlsx.ts", "test/xlsx.conformance.test.ts", "scripts/clean-room.mjs"], "commands": ["npm run check:conformance", "npm run check:clean-room", "npm run test"], "owner": "adapter", "risk": "critical", "humanReview": true },
+    { "id": "OS-06", "title": "CLI first-use", "paths": ["src/cli.ts", "scripts/cli-smoke.mjs", "scripts/quickstart-sessions.mjs", "docs/first-use.md"], "commands": ["npm run check:smoke", "npm run check:quickstart"], "owner": "onboarding", "risk": "medium", "humanReview": true },
+    { "id": "OS-07", "title": "Package/security surface", "paths": ["package.json", "scripts/check-pack.mjs", "scripts/check-secrets.mjs", "scripts/measure-budget.mjs"], "commands": ["npm run check:pack", "npm run check:secrets", "npm run check:budget"], "owner": "release", "risk": "high", "humanReview": true },
+    { "id": "OS-08", "title": "Unsupported capability behavior", "paths": ["src/core/capability.ts", "src/core/errors.ts", "test/conformance.test.ts", "docs/COMPATIBILITY.md"], "commands": ["npm run check:conformance", "npm run check:errors", "npm run typecheck"], "owner": "compatibility", "risk": "high", "humanReview": true }
+  ]
+}
