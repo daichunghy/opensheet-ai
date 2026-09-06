@@ -1,0 +1,564 @@
+{
+  "schemaVersion": "opensheet.example-artifact.v1",
+  "example": "inventory-revenue",
+  "intent": {
+    "module": "kpi-threshold",
+    "version": 1,
+    "workbook": "retail-ops-demo",
+    "sheetName": "Inventory Revenue",
+    "kpis": [
+      {
+        "code": "ON_HAND_UNITS",
+        "name": "Sellable units on hand",
+        "actual": 184,
+        "target": 250,
+        "warnBelow": 200,
+        "unit": "units"
+      },
+      {
+        "code": "DAILY_REVENUE",
+        "name": "Daily revenue",
+        "actual": 48200000,
+        "target": 50000000,
+        "warnBelow": 45000000,
+        "unit": "VND/day"
+      },
+      {
+        "code": "FULFILLED_ORDERS",
+        "name": "Orders fulfilled today",
+        "actual": 93,
+        "target": 100,
+        "warnBelow": 85,
+        "unit": "orders"
+      },
+      {
+        "code": "GROSS_MARGIN",
+        "name": "Gross margin",
+        "actual": 0.32,
+        "target": 0.3,
+        "unit": "share"
+      }
+    ]
+  },
+  "plan": {
+    "schemaVersion": "opensheet.plan.v1",
+    "planId": "kpi-threshold-d5ea251c327e5db4",
+    "source": {
+      "module": "kpi-threshold",
+      "version": "1"
+    },
+    "target": {
+      "workbook": "retail-ops-demo"
+    },
+    "operations": [
+      {
+        "id": "kpi.ensure",
+        "kind": "ensure-sheet",
+        "sheet": "Inventory Revenue"
+      },
+      {
+        "id": "kpi.write",
+        "kind": "write-range",
+        "sheet": "Inventory Revenue",
+        "range": "A1:G5",
+        "values": [
+          [
+            "KPI Code",
+            "KPI",
+            "Actual",
+            "Target",
+            "Gap",
+            "Status",
+            "Unit"
+          ],
+          [
+            "ON_HAND_UNITS",
+            "Sellable units on hand",
+            184,
+            250,
+            -66,
+            "below",
+            "units"
+          ],
+          [
+            "DAILY_REVENUE",
+            "Daily revenue",
+            48200000,
+            50000000,
+            -1800000,
+            "watch",
+            "VND/day"
+          ],
+          [
+            "FULFILLED_ORDERS",
+            "Orders fulfilled today",
+            93,
+            100,
+            -7,
+            "watch",
+            "orders"
+          ],
+          [
+            "GROSS_MARGIN",
+            "Gross margin",
+            0.32,
+            0.3,
+            0.02,
+            "met",
+            "share"
+          ]
+        ]
+      },
+      {
+        "id": "kpi.header-format",
+        "kind": "set-format",
+        "sheet": "Inventory Revenue",
+        "range": "A1:G1",
+        "format": {
+          "bold": true,
+          "backgroundColor": "#DCEFEA",
+          "wrap": true,
+          "horizontalAlignment": "center"
+        }
+      },
+      {
+        "id": "kpi.status-validation",
+        "kind": "set-data-validation",
+        "sheet": "Inventory Revenue",
+        "range": "F2:F5",
+        "rule": {
+          "kind": "list",
+          "values": [
+            "met",
+            "watch",
+            "below"
+          ],
+          "allowBlank": false
+        }
+      },
+      {
+        "id": "kpi.freeze",
+        "kind": "freeze-pane",
+        "sheet": "Inventory Revenue",
+        "rows": 1,
+        "columns": 0
+      },
+      {
+        "id": "kpi.widths",
+        "kind": "set-column-widths",
+        "sheet": "Inventory Revenue",
+        "widths": [
+          {
+            "column": "A",
+            "width": 16
+          },
+          {
+            "column": "B",
+            "width": 28
+          },
+          {
+            "column": "C",
+            "width": 12
+          },
+          {
+            "column": "D",
+            "width": 12
+          },
+          {
+            "column": "E",
+            "width": 12
+          },
+          {
+            "column": "F",
+            "width": 12
+          },
+          {
+            "column": "G",
+            "width": 12
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "kpiCount": "4"
+    }
+  },
+  "planDigest": "sha256:28494be51e74d06a92a6914216cdd4894ff5421f8828c79591fdb740f4718a5b",
+  "summary": {
+    "operationCount": 6,
+    "touchedCellCount": 46,
+    "sheets": [
+      "Inventory Revenue"
+    ],
+    "containsFormulaWrites": false
+  },
+  "table": [
+    {
+      "KPI Code": "ON_HAND_UNITS",
+      "KPI": "Sellable units on hand",
+      "Actual": 184,
+      "Target": 250,
+      "Gap": -66,
+      "Status": "below",
+      "Unit": "units"
+    },
+    {
+      "KPI Code": "DAILY_REVENUE",
+      "KPI": "Daily revenue",
+      "Actual": 48200000,
+      "Target": 50000000,
+      "Gap": -1800000,
+      "Status": "watch",
+      "Unit": "VND/day"
+    },
+    {
+      "KPI Code": "FULFILLED_ORDERS",
+      "KPI": "Orders fulfilled today",
+      "Actual": 93,
+      "Target": 100,
+      "Gap": -7,
+      "Status": "watch",
+      "Unit": "orders"
+    },
+    {
+      "KPI Code": "GROSS_MARGIN",
+      "KPI": "Gross margin",
+      "Actual": 0.32,
+      "Target": 0.3,
+      "Gap": 0.02,
+      "Status": "met",
+      "Unit": "share"
+    }
+  ],
+  "preview": {
+    "schemaVersion": "opensheet.receipt.v1",
+    "planDigest": "sha256:28494be51e74d06a92a6914216cdd4894ff5421f8828c79591fdb740f4718a5b",
+    "status": "dry-run",
+    "executedAt": "2026-08-27T00:00:00.000Z",
+    "executor": "opensheet-ai/example/inventory-revenue",
+    "beforeDigest": "sha256:3b8c78e1e68ebf2a2c4932526296e1eeaf70b9e12299431e8edc9db1155f67b5",
+    "afterDigest": "sha256:3b8c78e1e68ebf2a2c4932526296e1eeaf70b9e12299431e8edc9db1155f67b5",
+    "projectedAfterDigest": "sha256:c3f02e541107a53a4d74d1b79adf6ff4a2980d3c010e5c77f90bd1199ece3638",
+    "operations": [
+      {
+        "operationId": "kpi.ensure",
+        "status": "planned",
+        "touchedCells": 0
+      },
+      {
+        "operationId": "kpi.write",
+        "status": "planned",
+        "touchedCells": 35
+      },
+      {
+        "operationId": "kpi.header-format",
+        "status": "planned",
+        "touchedCells": 7
+      },
+      {
+        "operationId": "kpi.status-validation",
+        "status": "planned",
+        "touchedCells": 4
+      },
+      {
+        "operationId": "kpi.freeze",
+        "status": "planned",
+        "touchedCells": 0
+      },
+      {
+        "operationId": "kpi.widths",
+        "status": "planned",
+        "touchedCells": 0
+      }
+    ],
+    "findings": []
+  },
+  "memoryApply": {
+    "schemaVersion": "opensheet.receipt.v1",
+    "planDigest": "sha256:28494be51e74d06a92a6914216cdd4894ff5421f8828c79591fdb740f4718a5b",
+    "status": "applied",
+    "executedAt": "2026-08-27T00:00:00.000Z",
+    "executor": "opensheet-ai/example/inventory-revenue",
+    "beforeDigest": "sha256:3b8c78e1e68ebf2a2c4932526296e1eeaf70b9e12299431e8edc9db1155f67b5",
+    "afterDigest": "sha256:c3f02e541107a53a4d74d1b79adf6ff4a2980d3c010e5c77f90bd1199ece3638",
+    "operations": [
+      {
+        "operationId": "kpi.ensure",
+        "status": "applied",
+        "touchedCells": 0
+      },
+      {
+        "operationId": "kpi.write",
+        "status": "applied",
+        "touchedCells": 35
+      },
+      {
+        "operationId": "kpi.header-format",
+        "status": "applied",
+        "touchedCells": 7
+      },
+      {
+        "operationId": "kpi.status-validation",
+        "status": "applied",
+        "touchedCells": 4
+      },
+      {
+        "operationId": "kpi.freeze",
+        "status": "applied",
+        "touchedCells": 0
+      },
+      {
+        "operationId": "kpi.widths",
+        "status": "applied",
+        "touchedCells": 0
+      }
+    ],
+    "findings": []
+  },
+  "memorySnapshot": {
+    "schemaVersion": "opensheet.snapshot.v1",
+    "workbookId": "retail-ops-demo",
+    "sheets": [
+      {
+        "name": "Inventory Revenue",
+        "cells": [
+          {
+            "address": "A1",
+            "kind": "value",
+            "value": "KPI Code"
+          },
+          {
+            "address": "A2",
+            "kind": "value",
+            "value": "ON_HAND_UNITS"
+          },
+          {
+            "address": "A3",
+            "kind": "value",
+            "value": "DAILY_REVENUE"
+          },
+          {
+            "address": "A4",
+            "kind": "value",
+            "value": "FULFILLED_ORDERS"
+          },
+          {
+            "address": "A5",
+            "kind": "value",
+            "value": "GROSS_MARGIN"
+          },
+          {
+            "address": "B1",
+            "kind": "value",
+            "value": "KPI"
+          },
+          {
+            "address": "B2",
+            "kind": "value",
+            "value": "Sellable units on hand"
+          },
+          {
+            "address": "B3",
+            "kind": "value",
+            "value": "Daily revenue"
+          },
+          {
+            "address": "B4",
+            "kind": "value",
+            "value": "Orders fulfilled today"
+          },
+          {
+            "address": "B5",
+            "kind": "value",
+            "value": "Gross margin"
+          },
+          {
+            "address": "C1",
+            "kind": "value",
+            "value": "Actual"
+          },
+          {
+            "address": "C2",
+            "kind": "value",
+            "value": 184
+          },
+          {
+            "address": "C3",
+            "kind": "value",
+            "value": 48200000
+          },
+          {
+            "address": "C4",
+            "kind": "value",
+            "value": 93
+          },
+          {
+            "address": "C5",
+            "kind": "value",
+            "value": 0.32
+          },
+          {
+            "address": "D1",
+            "kind": "value",
+            "value": "Target"
+          },
+          {
+            "address": "D2",
+            "kind": "value",
+            "value": 250
+          },
+          {
+            "address": "D3",
+            "kind": "value",
+            "value": 50000000
+          },
+          {
+            "address": "D4",
+            "kind": "value",
+            "value": 100
+          },
+          {
+            "address": "D5",
+            "kind": "value",
+            "value": 0.3
+          },
+          {
+            "address": "E1",
+            "kind": "value",
+            "value": "Gap"
+          },
+          {
+            "address": "E2",
+            "kind": "value",
+            "value": -66
+          },
+          {
+            "address": "E3",
+            "kind": "value",
+            "value": -1800000
+          },
+          {
+            "address": "E4",
+            "kind": "value",
+            "value": -7
+          },
+          {
+            "address": "E5",
+            "kind": "value",
+            "value": 0.02
+          },
+          {
+            "address": "F1",
+            "kind": "value",
+            "value": "Status"
+          },
+          {
+            "address": "F2",
+            "kind": "value",
+            "value": "below"
+          },
+          {
+            "address": "F3",
+            "kind": "value",
+            "value": "watch"
+          },
+          {
+            "address": "F4",
+            "kind": "value",
+            "value": "watch"
+          },
+          {
+            "address": "F5",
+            "kind": "value",
+            "value": "met"
+          },
+          {
+            "address": "G1",
+            "kind": "value",
+            "value": "Unit"
+          },
+          {
+            "address": "G2",
+            "kind": "value",
+            "value": "units"
+          },
+          {
+            "address": "G3",
+            "kind": "value",
+            "value": "VND/day"
+          },
+          {
+            "address": "G4",
+            "kind": "value",
+            "value": "orders"
+          },
+          {
+            "address": "G5",
+            "kind": "value",
+            "value": "share"
+          }
+        ],
+        "validations": [
+          {
+            "range": "F2:F5",
+            "rule": {
+              "kind": "list",
+              "values": [
+                "met",
+                "watch",
+                "below"
+              ],
+              "allowBlank": false
+            }
+          }
+        ],
+        "formats": [
+          {
+            "range": "A1:G1",
+            "format": {
+              "bold": true,
+              "backgroundColor": "#DCEFEA",
+              "wrap": true,
+              "horizontalAlignment": "center"
+            }
+          }
+        ],
+        "frozen": {
+          "rows": 1,
+          "columns": 0
+        },
+        "columnWidths": [
+          {
+            "column": "A",
+            "width": 16
+          },
+          {
+            "column": "B",
+            "width": 28
+          },
+          {
+            "column": "C",
+            "width": 12
+          },
+          {
+            "column": "D",
+            "width": 12
+          },
+          {
+            "column": "E",
+            "width": 12
+          },
+          {
+            "column": "F",
+            "width": 12
+          },
+          {
+            "column": "G",
+            "width": 12
+          }
+        ]
+      }
+    ]
+  }
+}
+

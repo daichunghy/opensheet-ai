@@ -1,0 +1,1209 @@
+{
+  "schemaVersion": "opensheet.example-artifact.v1",
+  "example": "service-quality",
+  "provenance": {
+    "label": "demonstration",
+    "statement": "Illustrative multi-factor scale-bank items; not a validated measurement instrument.",
+    "itemSources": "demonstration-only; no citation supplied",
+    "execution": "local memory adapter",
+    "network": false,
+    "model": false,
+    "credentials": false,
+    "nativeExcelOrGoogleSheets": false
+  },
+  "intent": {
+    "module": "scale-bank",
+    "version": 1,
+    "workbook": "service-quality-research-demo",
+    "sheetName": "Service Quality Scale Bank",
+    "constructs": [
+      {
+        "code": "RELIABILITY",
+        "name": "Service reliability",
+        "scale": {
+          "min": 1,
+          "max": 5
+        },
+        "items": [
+          {
+            "code": "REL1",
+            "text": "This service delivers what it promises.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "code": "REL2",
+            "text": "The service performs consistently when I need it.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "code": "REL3",
+            "text": "The service gets my request right the first time.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          }
+        ]
+      },
+      {
+        "code": "RESPONSIVENESS",
+        "name": "Service responsiveness",
+        "scale": {
+          "min": 1,
+          "max": 5
+        },
+        "items": [
+          {
+            "code": "RSP1",
+            "text": "Staff respond to my request promptly.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "code": "RSP2",
+            "text": "It is easy to get help when I need it.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "code": "RSP3",
+            "text": "The service keeps me informed when a request takes longer than expected.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          }
+        ]
+      },
+      {
+        "code": "ASSURANCE",
+        "name": "Service assurance",
+        "scale": {
+          "min": 1,
+          "max": 5
+        },
+        "items": [
+          {
+            "code": "ASS1",
+            "text": "I feel confident in the staff's competence.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "code": "ASS2",
+            "text": "The service handles my information responsibly.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "code": "ASS3",
+            "text": "The staff make me feel safe when I use this service.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          }
+        ]
+      },
+      {
+        "code": "SATISFACTION",
+        "name": "Customer satisfaction",
+        "scale": {
+          "min": 1,
+          "max": 5
+        },
+        "items": [
+          {
+            "code": "SAT1",
+            "text": "Overall, I am satisfied with this service.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "code": "SAT2",
+            "text": "This service meets my expectations.",
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "code": "SAT3",
+            "text": "Choosing this service was a poor decision.",
+            "reverse": true,
+            "source": "Demonstration item; replace with a cited validated scale before research use."
+          }
+        ]
+      }
+    ]
+  },
+  "plan": {
+    "schemaVersion": "opensheet.plan.v1",
+    "planId": "scale-bank-73532f1f9b37c38d",
+    "source": {
+      "module": "scale-bank",
+      "version": "1"
+    },
+    "target": {
+      "workbook": "service-quality-research-demo"
+    },
+    "operations": [
+      {
+        "id": "scale.ensure",
+        "kind": "ensure-sheet",
+        "sheet": "Service Quality Scale Bank"
+      },
+      {
+        "id": "scale.write",
+        "kind": "write-range",
+        "sheet": "Service Quality Scale Bank",
+        "range": "A1:H13",
+        "values": [
+          [
+            "Construct Code",
+            "Construct",
+            "Item Code",
+            "Item Text",
+            "Scale Min",
+            "Scale Max",
+            "Reverse",
+            "Source"
+          ],
+          [
+            "RELIABILITY",
+            "Service reliability",
+            "REL1",
+            "This service delivers what it promises.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "RELIABILITY",
+            "Service reliability",
+            "REL2",
+            "The service performs consistently when I need it.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "RELIABILITY",
+            "Service reliability",
+            "REL3",
+            "The service gets my request right the first time.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "RESPONSIVENESS",
+            "Service responsiveness",
+            "RSP1",
+            "Staff respond to my request promptly.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "RESPONSIVENESS",
+            "Service responsiveness",
+            "RSP2",
+            "It is easy to get help when I need it.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "RESPONSIVENESS",
+            "Service responsiveness",
+            "RSP3",
+            "The service keeps me informed when a request takes longer than expected.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "ASSURANCE",
+            "Service assurance",
+            "ASS1",
+            "I feel confident in the staff's competence.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "ASSURANCE",
+            "Service assurance",
+            "ASS2",
+            "The service handles my information responsibly.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "ASSURANCE",
+            "Service assurance",
+            "ASS3",
+            "The staff make me feel safe when I use this service.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "SATISFACTION",
+            "Customer satisfaction",
+            "SAT1",
+            "Overall, I am satisfied with this service.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "SATISFACTION",
+            "Customer satisfaction",
+            "SAT2",
+            "This service meets my expectations.",
+            1,
+            5,
+            false,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ],
+          [
+            "SATISFACTION",
+            "Customer satisfaction",
+            "SAT3",
+            "Choosing this service was a poor decision.",
+            1,
+            5,
+            true,
+            "Demonstration item; replace with a cited validated scale before research use."
+          ]
+        ]
+      },
+      {
+        "id": "scale.header-format",
+        "kind": "set-format",
+        "sheet": "Service Quality Scale Bank",
+        "range": "A1:H1",
+        "format": {
+          "bold": true,
+          "backgroundColor": "#DCEFEA",
+          "wrap": true,
+          "horizontalAlignment": "center"
+        }
+      },
+      {
+        "id": "scale.body-wrap",
+        "kind": "set-format",
+        "sheet": "Service Quality Scale Bank",
+        "range": "A2:H13",
+        "format": {
+          "wrap": true,
+          "horizontalAlignment": "left"
+        }
+      },
+      {
+        "id": "scale.freeze",
+        "kind": "freeze-pane",
+        "sheet": "Service Quality Scale Bank",
+        "rows": 1,
+        "columns": 0
+      },
+      {
+        "id": "scale.widths",
+        "kind": "set-column-widths",
+        "sheet": "Service Quality Scale Bank",
+        "widths": [
+          {
+            "column": "A",
+            "width": 18
+          },
+          {
+            "column": "B",
+            "width": 28
+          },
+          {
+            "column": "C",
+            "width": 16
+          },
+          {
+            "column": "D",
+            "width": 54
+          },
+          {
+            "column": "E",
+            "width": 12
+          },
+          {
+            "column": "F",
+            "width": 12
+          },
+          {
+            "column": "G",
+            "width": 12
+          },
+          {
+            "column": "H",
+            "width": 28
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "constructCount": "4",
+      "itemCount": "12"
+    }
+  },
+  "planDigest": "sha256:6c3d65682cd5664021005abe1ff82aa4e83297f79bc2975887a2ee32d0cabf13",
+  "summary": {
+    "operationCount": 6,
+    "touchedCellCount": 208,
+    "sheets": [
+      "Service Quality Scale Bank"
+    ],
+    "containsFormulaWrites": false,
+    "constructCount": 4,
+    "itemCount": 12,
+    "reverseKeyedItemCount": 1
+  },
+  "constructs": [
+    {
+      "code": "RELIABILITY",
+      "name": "Service reliability",
+      "scale": {
+        "min": 1,
+        "max": 5
+      },
+      "itemCount": 3,
+      "reverseItemCodes": []
+    },
+    {
+      "code": "RESPONSIVENESS",
+      "name": "Service responsiveness",
+      "scale": {
+        "min": 1,
+        "max": 5
+      },
+      "itemCount": 3,
+      "reverseItemCodes": []
+    },
+    {
+      "code": "ASSURANCE",
+      "name": "Service assurance",
+      "scale": {
+        "min": 1,
+        "max": 5
+      },
+      "itemCount": 3,
+      "reverseItemCodes": []
+    },
+    {
+      "code": "SATISFACTION",
+      "name": "Customer satisfaction",
+      "scale": {
+        "min": 1,
+        "max": 5
+      },
+      "itemCount": 3,
+      "reverseItemCodes": [
+        "SAT3"
+      ]
+    }
+  ],
+  "reverseKeyedItems": [
+    {
+      "constructCode": "SATISFACTION",
+      "itemCode": "SAT3",
+      "itemText": "Choosing this service was a poor decision."
+    }
+  ],
+  "table": [
+    {
+      "Construct Code": "RELIABILITY",
+      "Construct": "Service reliability",
+      "Item Code": "REL1",
+      "Item Text": "This service delivers what it promises.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "RELIABILITY",
+      "Construct": "Service reliability",
+      "Item Code": "REL2",
+      "Item Text": "The service performs consistently when I need it.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "RELIABILITY",
+      "Construct": "Service reliability",
+      "Item Code": "REL3",
+      "Item Text": "The service gets my request right the first time.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "RESPONSIVENESS",
+      "Construct": "Service responsiveness",
+      "Item Code": "RSP1",
+      "Item Text": "Staff respond to my request promptly.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "RESPONSIVENESS",
+      "Construct": "Service responsiveness",
+      "Item Code": "RSP2",
+      "Item Text": "It is easy to get help when I need it.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "RESPONSIVENESS",
+      "Construct": "Service responsiveness",
+      "Item Code": "RSP3",
+      "Item Text": "The service keeps me informed when a request takes longer than expected.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "ASSURANCE",
+      "Construct": "Service assurance",
+      "Item Code": "ASS1",
+      "Item Text": "I feel confident in the staff's competence.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "ASSURANCE",
+      "Construct": "Service assurance",
+      "Item Code": "ASS2",
+      "Item Text": "The service handles my information responsibly.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "ASSURANCE",
+      "Construct": "Service assurance",
+      "Item Code": "ASS3",
+      "Item Text": "The staff make me feel safe when I use this service.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "SATISFACTION",
+      "Construct": "Customer satisfaction",
+      "Item Code": "SAT1",
+      "Item Text": "Overall, I am satisfied with this service.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "SATISFACTION",
+      "Construct": "Customer satisfaction",
+      "Item Code": "SAT2",
+      "Item Text": "This service meets my expectations.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": false,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    },
+    {
+      "Construct Code": "SATISFACTION",
+      "Construct": "Customer satisfaction",
+      "Item Code": "SAT3",
+      "Item Text": "Choosing this service was a poor decision.",
+      "Scale Min": 1,
+      "Scale Max": 5,
+      "Reverse": true,
+      "Source": "Demonstration item; replace with a cited validated scale before research use."
+    }
+  ],
+  "preview": {
+    "schemaVersion": "opensheet.receipt.v1",
+    "planDigest": "sha256:6c3d65682cd5664021005abe1ff82aa4e83297f79bc2975887a2ee32d0cabf13",
+    "status": "dry-run",
+    "executedAt": "2026-08-27T00:00:00.000Z",
+    "executor": "opensheet-ai/example/service-quality",
+    "beforeDigest": "sha256:16a0bb00c4fbc96a83caf243e53209f53f7c2aff3de44ab45c5a3e3e0f2e1d1a",
+    "afterDigest": "sha256:16a0bb00c4fbc96a83caf243e53209f53f7c2aff3de44ab45c5a3e3e0f2e1d1a",
+    "projectedAfterDigest": "sha256:542e6034aa0f32cb4d8c592ed4904e9c6232c45748771298cd28c4cf6551c972",
+    "operations": [
+      {
+        "operationId": "scale.ensure",
+        "status": "planned",
+        "touchedCells": 0
+      },
+      {
+        "operationId": "scale.write",
+        "status": "planned",
+        "touchedCells": 104
+      },
+      {
+        "operationId": "scale.header-format",
+        "status": "planned",
+        "touchedCells": 8
+      },
+      {
+        "operationId": "scale.body-wrap",
+        "status": "planned",
+        "touchedCells": 96
+      },
+      {
+        "operationId": "scale.freeze",
+        "status": "planned",
+        "touchedCells": 0
+      },
+      {
+        "operationId": "scale.widths",
+        "status": "planned",
+        "touchedCells": 0
+      }
+    ],
+    "findings": []
+  },
+  "memoryApply": {
+    "schemaVersion": "opensheet.receipt.v1",
+    "planDigest": "sha256:6c3d65682cd5664021005abe1ff82aa4e83297f79bc2975887a2ee32d0cabf13",
+    "status": "applied",
+    "executedAt": "2026-08-27T00:00:00.000Z",
+    "executor": "opensheet-ai/example/service-quality",
+    "beforeDigest": "sha256:16a0bb00c4fbc96a83caf243e53209f53f7c2aff3de44ab45c5a3e3e0f2e1d1a",
+    "afterDigest": "sha256:542e6034aa0f32cb4d8c592ed4904e9c6232c45748771298cd28c4cf6551c972",
+    "operations": [
+      {
+        "operationId": "scale.ensure",
+        "status": "applied",
+        "touchedCells": 0
+      },
+      {
+        "operationId": "scale.write",
+        "status": "applied",
+        "touchedCells": 104
+      },
+      {
+        "operationId": "scale.header-format",
+        "status": "applied",
+        "touchedCells": 8
+      },
+      {
+        "operationId": "scale.body-wrap",
+        "status": "applied",
+        "touchedCells": 96
+      },
+      {
+        "operationId": "scale.freeze",
+        "status": "applied",
+        "touchedCells": 0
+      },
+      {
+        "operationId": "scale.widths",
+        "status": "applied",
+        "touchedCells": 0
+      }
+    ],
+    "findings": []
+  },
+  "memorySnapshot": {
+    "schemaVersion": "opensheet.snapshot.v1",
+    "workbookId": "service-quality-research-demo",
+    "sheets": [
+      {
+        "name": "Service Quality Scale Bank",
+        "cells": [
+          {
+            "address": "A1",
+            "kind": "value",
+            "value": "Construct Code"
+          },
+          {
+            "address": "A2",
+            "kind": "value",
+            "value": "RELIABILITY"
+          },
+          {
+            "address": "A3",
+            "kind": "value",
+            "value": "RELIABILITY"
+          },
+          {
+            "address": "A4",
+            "kind": "value",
+            "value": "RELIABILITY"
+          },
+          {
+            "address": "A5",
+            "kind": "value",
+            "value": "RESPONSIVENESS"
+          },
+          {
+            "address": "A6",
+            "kind": "value",
+            "value": "RESPONSIVENESS"
+          },
+          {
+            "address": "A7",
+            "kind": "value",
+            "value": "RESPONSIVENESS"
+          },
+          {
+            "address": "A8",
+            "kind": "value",
+            "value": "ASSURANCE"
+          },
+          {
+            "address": "A9",
+            "kind": "value",
+            "value": "ASSURANCE"
+          },
+          {
+            "address": "A10",
+            "kind": "value",
+            "value": "ASSURANCE"
+          },
+          {
+            "address": "A11",
+            "kind": "value",
+            "value": "SATISFACTION"
+          },
+          {
+            "address": "A12",
+            "kind": "value",
+            "value": "SATISFACTION"
+          },
+          {
+            "address": "A13",
+            "kind": "value",
+            "value": "SATISFACTION"
+          },
+          {
+            "address": "B1",
+            "kind": "value",
+            "value": "Construct"
+          },
+          {
+            "address": "B2",
+            "kind": "value",
+            "value": "Service reliability"
+          },
+          {
+            "address": "B3",
+            "kind": "value",
+            "value": "Service reliability"
+          },
+          {
+            "address": "B4",
+            "kind": "value",
+            "value": "Service reliability"
+          },
+          {
+            "address": "B5",
+            "kind": "value",
+            "value": "Service responsiveness"
+          },
+          {
+            "address": "B6",
+            "kind": "value",
+            "value": "Service responsiveness"
+          },
+          {
+            "address": "B7",
+            "kind": "value",
+            "value": "Service responsiveness"
+          },
+          {
+            "address": "B8",
+            "kind": "value",
+            "value": "Service assurance"
+          },
+          {
+            "address": "B9",
+            "kind": "value",
+            "value": "Service assurance"
+          },
+          {
+            "address": "B10",
+            "kind": "value",
+            "value": "Service assurance"
+          },
+          {
+            "address": "B11",
+            "kind": "value",
+            "value": "Customer satisfaction"
+          },
+          {
+            "address": "B12",
+            "kind": "value",
+            "value": "Customer satisfaction"
+          },
+          {
+            "address": "B13",
+            "kind": "value",
+            "value": "Customer satisfaction"
+          },
+          {
+            "address": "C1",
+            "kind": "value",
+            "value": "Item Code"
+          },
+          {
+            "address": "C2",
+            "kind": "value",
+            "value": "REL1"
+          },
+          {
+            "address": "C3",
+            "kind": "value",
+            "value": "REL2"
+          },
+          {
+            "address": "C4",
+            "kind": "value",
+            "value": "REL3"
+          },
+          {
+            "address": "C5",
+            "kind": "value",
+            "value": "RSP1"
+          },
+          {
+            "address": "C6",
+            "kind": "value",
+            "value": "RSP2"
+          },
+          {
+            "address": "C7",
+            "kind": "value",
+            "value": "RSP3"
+          },
+          {
+            "address": "C8",
+            "kind": "value",
+            "value": "ASS1"
+          },
+          {
+            "address": "C9",
+            "kind": "value",
+            "value": "ASS2"
+          },
+          {
+            "address": "C10",
+            "kind": "value",
+            "value": "ASS3"
+          },
+          {
+            "address": "C11",
+            "kind": "value",
+            "value": "SAT1"
+          },
+          {
+            "address": "C12",
+            "kind": "value",
+            "value": "SAT2"
+          },
+          {
+            "address": "C13",
+            "kind": "value",
+            "value": "SAT3"
+          },
+          {
+            "address": "D1",
+            "kind": "value",
+            "value": "Item Text"
+          },
+          {
+            "address": "D2",
+            "kind": "value",
+            "value": "This service delivers what it promises."
+          },
+          {
+            "address": "D3",
+            "kind": "value",
+            "value": "The service performs consistently when I need it."
+          },
+          {
+            "address": "D4",
+            "kind": "value",
+            "value": "The service gets my request right the first time."
+          },
+          {
+            "address": "D5",
+            "kind": "value",
+            "value": "Staff respond to my request promptly."
+          },
+          {
+            "address": "D6",
+            "kind": "value",
+            "value": "It is easy to get help when I need it."
+          },
+          {
+            "address": "D7",
+            "kind": "value",
+            "value": "The service keeps me informed when a request takes longer than expected."
+          },
+          {
+            "address": "D8",
+            "kind": "value",
+            "value": "I feel confident in the staff's competence."
+          },
+          {
+            "address": "D9",
+            "kind": "value",
+            "value": "The service handles my information responsibly."
+          },
+          {
+            "address": "D10",
+            "kind": "value",
+            "value": "The staff make me feel safe when I use this service."
+          },
+          {
+            "address": "D11",
+            "kind": "value",
+            "value": "Overall, I am satisfied with this service."
+          },
+          {
+            "address": "D12",
+            "kind": "value",
+            "value": "This service meets my expectations."
+          },
+          {
+            "address": "D13",
+            "kind": "value",
+            "value": "Choosing this service was a poor decision."
+          },
+          {
+            "address": "E1",
+            "kind": "value",
+            "value": "Scale Min"
+          },
+          {
+            "address": "E2",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E3",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E4",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E5",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E6",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E7",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E8",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E9",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E10",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E11",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E12",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "E13",
+            "kind": "value",
+            "value": 1
+          },
+          {
+            "address": "F1",
+            "kind": "value",
+            "value": "Scale Max"
+          },
+          {
+            "address": "F2",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F3",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F4",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F5",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F6",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F7",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F8",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F9",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F10",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F11",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F12",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "F13",
+            "kind": "value",
+            "value": 5
+          },
+          {
+            "address": "G1",
+            "kind": "value",
+            "value": "Reverse"
+          },
+          {
+            "address": "G2",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G3",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G4",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G5",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G6",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G7",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G8",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G9",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G10",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G11",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G12",
+            "kind": "value",
+            "value": false
+          },
+          {
+            "address": "G13",
+            "kind": "value",
+            "value": true
+          },
+          {
+            "address": "H1",
+            "kind": "value",
+            "value": "Source"
+          },
+          {
+            "address": "H2",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H3",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H4",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H5",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H6",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H7",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H8",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H9",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H10",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H11",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H12",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          },
+          {
+            "address": "H13",
+            "kind": "value",
+            "value": "Demonstration item; replace with a cited validated scale before research use."
+          }
+        ],
+        "validations": [],
+        "formats": [
+          {
+            "range": "A1:H1",
+            "format": {
+              "bold": true,
+              "backgroundColor": "#DCEFEA",
+              "wrap": true,
+              "horizontalAlignment": "center"
+            }
+          },
+          {
+            "range": "A2:H13",
+            "format": {
+              "wrap": true,
+              "horizontalAlignment": "left"
+            }
+          }
+        ],
+        "frozen": {
+          "rows": 1,
+          "columns": 0
+        },
+        "columnWidths": [
+          {
+            "column": "A",
+            "width": 18
+          },
+          {
+            "column": "B",
+            "width": 28
+          },
+          {
+            "column": "C",
+            "width": 16
+          },
+          {
+            "column": "D",
+            "width": 54
+          },
+          {
+            "column": "E",
+            "width": 12
+          },
+          {
+            "column": "F",
+            "width": 12
+          },
+          {
+            "column": "G",
+            "width": 12
+          },
+          {
+            "column": "H",
+            "width": 28
+          }
+        ]
+      }
+    ]
+  }
+}

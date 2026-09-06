@@ -2,6 +2,21 @@
 
 All notable changes are documented here, newest first. Entries mirror the tagged releases (dates UTC); the release page for each tag carries the same text plus its assets.
 
+## [Unreleased]
+
+- Added inventory/revenue and service-quality scale-bank examples with
+  deterministic previews, memory dry-runs, and new XLSX output examples.
+- Added a direct `preview <intent.json>` CLI path that returns the compiled
+  plan, digest, and non-mutating memory receipt without an intermediate file.
+- Added optional `preview --format text` output with intent/source, plan
+  summary, receipt status, and next-step guidance; JSON remains the default
+  and typed-intent validation is unchanged.
+- Added ready-to-open inventory/revenue and service-quality `.xlsx` examples
+  with a `Read me` sheet, formula-driven KPI status, and visible scale-bank
+  metadata. These remain demonstration artifacts, not native-runtime evidence.
+- Added release/update/rollback guidance. This entry is not a published
+  version and does not add native Excel or Google Sheets support.
+
 ## [v0.1.0-alpha.4](https://github.com/daichunghy/opensheet-ai/releases/tag/v0.1.0-alpha.4) — 2026-08-23
 
 Current public source alpha. Package, tag, README, support page, examples, pack check, and main are synchronized at v0.1.0-alpha.4. The clean-clone verify path passes and the tarball now includes examples. npm registry publication remains pending OTP verification; external adoption is not claimed.
@@ -17,4 +32,3 @@ Current public source alpha. The GitHub tag is verified by npm ci and npm run ve
 ## [v0.1.0-alpha.1](https://github.com/daichunghy/opensheet-ai/releases/tag/v0.1.0-alpha.1) — 2026-08-23
 
 Public alpha. Deterministic plans, policy gates, receipts, in-memory execution, and a greenfield XLSX adapter. This release does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption. Verify with npm run verify; external quickstart evidence is not yet recorded.
-

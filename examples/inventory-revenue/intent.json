@@ -1,0 +1,39 @@
+{
+  "module": "kpi-threshold",
+  "version": 1,
+  "workbook": "retail-ops-demo",
+  "sheetName": "Inventory Revenue",
+  "kpis": [
+    {
+      "code": "ON_HAND_UNITS",
+      "name": "Sellable units on hand",
+      "actual": 184,
+      "target": 250,
+      "warnBelow": 200,
+      "unit": "units"
+    },
+    {
+      "code": "DAILY_REVENUE",
+      "name": "Daily revenue",
+      "actual": 48200000,
+      "target": 50000000,
+      "warnBelow": 45000000,
+      "unit": "VND/day"
+    },
+    {
+      "code": "FULFILLED_ORDERS",
+      "name": "Orders fulfilled today",
+      "actual": 93,
+      "target": 100,
+      "warnBelow": 85,
+      "unit": "orders"
+    },
+    {
+      "code": "GROSS_MARGIN",
+      "name": "Gross margin",
+      "actual": 0.32,
+      "target": 0.3,
+      "unit": "share"
+    }
+  ]
+}
