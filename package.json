@@ -51,6 +51,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "check:pack": "node scripts/check-pack.mjs",
+    "check:release-candidate": "node scripts/check-release-candidate.mjs",
     "check:schema": "node scripts/check-schema.mjs",
     "check:adapter-errors": "node scripts/check-adapter-error-reference.mjs",
     "check:errors": "node scripts/check-error-reference.mjs",
@@ -61,15 +62,17 @@
     "check:conformance": "node scripts/conformance.mjs",
     "check:quickstart": "node scripts/quickstart-sessions.mjs",
     "pack:session": "node scripts/pack-session.mjs",
-    "verify": "npm run typecheck && npm run build && npm run test && npm run check:schema && npm run check:adapter-errors && npm run check:errors && npm run check:budget && npm run check:pack && npm run check:secrets && npm run check:smoke && npm run check:clean-room && npm run check:conformance && npm run check:quickstart"
+    "check:agent-contract": "node scripts/check-agent-contract.mjs",
+    "agent-eval": "node scripts/run-agent-eval.mjs",
+    "verify": "npm run typecheck && npm run build && npm run test && npm run check:schema && npm run check:adapter-errors && npm run check:errors && npm run check:budget && npm run check:pack && npm run check:secrets && npm run check:smoke && npm run check:clean-room && npm run check:conformance && npm run check:quickstart && npm run check:agent-contract && npm run check:release-candidate"
   },
   "devDependencies": {
-    "@types/node": "^22.15.3",
+    "@types/node": "^26.4.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "fast-check": "^4.3.0",
     "typescript": "^5.8.3",
-    "vitest": "^3.1.2"
+    "vitest": "^4.1.11"
   },
   "dependencies": {
     "exceljs": "^4.4.0"

@@ -49,6 +49,8 @@ const required = [
   "schemas/intent.kpi-threshold.v1.schema.json",
   "examples/scale-bank.json",
   "examples/gap-map.json",
+  "examples/inventory-revenue/sample.xlsx",
+  "examples/service-quality/sample.xlsx",
 ];
 const missing = required.filter((path) => !paths.includes(path));
 if (missing.length > 0) {
