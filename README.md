@@ -4,7 +4,7 @@ OpenSheet-AI turns a typed spreadsheet change into a validated plan, a dry-run r
 
 The project is deliberately not another spreadsheet chatbot or a direct-write MCP server. Model providers, MCP servers, Excel, Google Sheets, ERP connectors, and quantitative engines belong at the edges. The core remains deterministic and testable without credentials, network access, or an LLM.
 
-**Live status (2026-09-06):** public alpha (`0.1.0-alpha.5` on GitHub and npm, 1 GitHub star, 0 forks). No external consumer repository or pilot is verified yet. The npm `alpha` and `latest` dist-tags both resolve `0.1.0-alpha.5`, and the published tarball ships the packaged examples. The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
+**Live status (2026-09-06):** public alpha (`0.1.0-alpha.5` on GitHub and npm, 1 star, 0 forks). No external consumer repository or pilot is verified yet. The npm `alpha` and `latest` dist-tags both resolve `0.1.0-alpha.5`, and the published tarball ships the packaged examples. The release is deliberately narrow: deterministic planning, policy evaluation, receipts, in-memory execution, and a greenfield `.xlsx` adapter. It does not claim Google Sheets, Excel desktop, formula recalculation, SEM, ERP, payment, or production adoption.
 
 > If a dry-run receipt caught a wrong range before it reached a workbook,
 > [star it](https://github.com/daichunghy/opensheet-ai/stargazers). That is the
